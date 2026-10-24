@@ -1,32 +1,35 @@
-# English Lab — Hujjatlar To'plami (Documentation)
+# English Lab — Technical Documentation
 
-**English Lab** — foydalanuvchiga ingliz tili lug'at boyligini (vocabulary) samarali oshirishga mo'ljallangan, shaxsiy foydalanish uchun yaratilayotgan zamonaviy veb-platforma. Loyiha **Next.js (React / Node.js)** texnologiyasida quriladi, ma'lumotlar bazasi sifatida **GitHub repozitoriysidagi JSON fayllardan** foydalanadi va **Vercel** platformasiga deploy qilinadi.
+**English Lab** is a personalized, self-hosted web application engineered to accelerate English vocabulary acquisition through active recall, spelling over ghost watermarks, and multiple-choice quizzes. Built with **Next.js (React / Node.js)** adhering to **Clean Architecture**, styled via **Tailwind CSS (CDN)** in a high-contrast **Dark Blue Glassmorphism** theme, and deployed to **Vercel**.
 
-Ushbu `documents/` papkasida loyihaning to'liq arxitekturasi, ishlash mexanizmlari, ma'lumotlar tuzilishi, o'yin rejimlari va texnik spetsifikatsiyalari yozilgan.
+This `documents/` folder contains the end-to-end technical specifications, architectural designs, data schemas, game mechanics, and implementation roadmaps.
 
 ---
 
-## 📑 Hujjatlar Mundarijasi
+## 📑 Table of Contents
 
-| Fayl | Nomi | Tavsifi |
+| File | Document | Purpose & Summary |
 | :--- | :--- | :--- |
-| [01_overview.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/01_overview.md) | **Loyihaning Umumiy Tavsifi** | Loyiha maqsadi, asosiy xususiyatlari, talablar va texnologiyalar steki |
-| [02_architecture.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/02_architecture.md) | **Texnik Arxitektura** | Next.js App Router, GitHub Data Fetching (Server-Side / ISR), Vercel integratsiyasi |
-| [03_data_structure.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/03_data_structure.md) | **Ma'lumotlar Tuzilishi (JSON)** | So'zlar bazasi formati, schema, validatsiya va yangi so'zlarni kiritish tartibi |
-| [04_game_modes_and_logic.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/04_game_modes_and_logic.md) | **O'yin Rejimlari va Ishlash Logikasi** | 20 talik sessiya, Test (Quiz) rejimi, Harf terish (Letter Fill) rejimi, UZ↔EN yo'nalishlar |
-| [05_ui_ux_flow.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/05_ui_ux_flow.md) | **UI/UX Dizayn va Foydalanuvchi Oqimi** | Ekranlar, komponentlar, klaviatura boshqaruvi, animatsiyalar va dizayn qoidalari |
-| [06_roadmap.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/06_roadmap.md) | **Bosqichma-bosqich Reja (Roadmap)** | Loyihani ishga tushirish, dasturlash va Vercel-ga yuklash bosqichlari |
+| [01_overview.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/01_overview.md) | **Project Overview** | Core mission, key requirements, target audience, and primary differentiators |
+| [02_architecture.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/02_architecture.md) | **Technical Architecture** | Clean Architecture layers, Next.js App Router, Tailwind CDN, and Vercel hosting |
+| [03_data_structure.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/03_data_structure.md) | **Data Structure & JSON** | Hierarchical CEFR A1-C2 schema, single words, sentence tokens, and helpers |
+| [04_game_modes_and_logic.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/04_game_modes_and_logic.md) | **Game Modes & Core Logic** | Endless practice loop, ghost watermark typing mechanics, and bilingual directions |
+| [05_ui_ux_flow.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/05_ui_ux_flow.md) | **UI/UX Design & User Flow** | Dark blue glassmorphism, responsive split layout, and keyboard shortcuts |
+| [06_roadmap.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/06_roadmap.md) | **Implementation Roadmap** | Step-by-step milestones, validation checklist, and CI/CD setup |
 
 ---
 
-## 🚀 Loyihaning Qisqa Xulosasi
+## ⚡ Architecture at a Glance
 
-- **Maqsad:** Shaxsiy lug'atni qo'lda kiritish va doimiy takrorlab mustahkamlash.
-- **Asosiy mexanika:**
-  - Har bir mashg'ulotda random tarzda tanlangan **20 ta so'z** beriladi.
-  - 2 xil yo'nalish: **O'zbekcha ➡️ Inglizcha** va **Inglizcha ➡️ O'zbekcha**.
-  - 2 xil mashq usuli:
-    1. **Quiz Test:** 4 ta variantdan to'g'ri javobni tanlash.
-    2. **Harf to'ldirish (Letter Box):** Chapda so'z chiqadi, o'ngda disable katakchalar turadi — harflar klaviatura yoki tugmalar orqali to'ldiriladi.
-- **Baza:** GitHub repoda saqlanuvchi `words.json` fayli (ortiqcha murakkab ma'lumotlar bazasiga hojat yo'q).
-- **Deploy:** Vercel (bepul, avtomatlashgan CI/CD, tezkor Edge keshlash).
+```text
+Domain Entities  ──▶  Application Use Cases  ──▶  Infrastructure (FS & GitHub)
+       │                        │                               │
+       └────────────────────────┴───────────────────────────────┘
+                                ▼
+                       Presentation Layer
+                 (React, Tailwind CDN & Glassmorphism)
+```
+
+- **Database:** Serverless JSON file stored at `data/words.json` in the Git repo.
+- **Styling:** Native Tailwind CSS loaded via high-performance CDN script with custom dark blue glass tokens.
+- **Hosting:** Vercel with automatic edge caching and fast builds.

@@ -1,46 +1,51 @@
-# 01. Loyihaning Umumiy Tavsifi (Overview)
+# 01. Project Overview
 
-## 1. Kirish va Maqsad
+## 1. Introduction and Objectives
 
-**English Lab** — ingliz tili lug'atini (vocabulary) individual va samarali o'rganish uchun mo'ljallangan yengil, tezkor va interaktiv veb-ilova.
+**English Lab** is an interactive, lightweight web application built for individuals who want an efficient, personalized environment to build and retain English vocabulary.
 
-Ko'pgina o'quv dasturlarida (masalan, Duolingo, Memrise yoki Anki) tayyor lug'at bazalari beriladi va ular ko'pincha foydalanuvchining shaxsiy ehtiyojlariga (kundalik ishda, texnik sohada yoki kitob o'qishda uchragan yangi so'zlarga) to'liq mos kelmaydi. **English Lab** loyihasining asosiy g'oyasi — foydalanuvchi o'zi o'rganmoqchi bo'lgan so'zlarni bevosita **GitHub repozitoriysidagi JSON faylga qo'lda kiritadi**, ilova esa ushbu bazadan foydalanib o'yinlashtirilgan interaktiv mashg'ulotlar yaratib beradi.
-
----
-
-## 2. Asosiy Talablar va Funksionallik
-
-1. **Qo'lda kiritiladigan lug'at bazasi (Manual Word Management):**
-   - So'zlar ingliz tilida va ularning o'zbek tilidagi tarjimasi bilan birga kiritiladi.
-   - Baza alohida murakkab ma'lumotlar bazasisiz (PostgreSQL, MongoDB talab qilinmaydi), to'g'ridan-to'g'ri GitHub repozitoriysidagi `data/words.json` faylida saqlanadi.
-   - Yangi so'z qo'shish uchun GitHub veb-interfeysi yoki VS Code/git orqali JSON faylni tahrirlash kifoya.
-
-2. **20 talik tasodifiy sessiya (Randomized 20-word Quizzes):**
-   - Har bir o'quv sessiyasi umumiy bazadan tasodifiy (random) tartibda tanlab olingan **aniq 20 ta so'zdan** iborat bo'ladi.
-   - 20 ta so'z tugagach, foydalanuvchiga natijalar, to'g'ri/xato javoblar va xato qilingan so'zlar ro'yxati ko'rsatiladi.
-
-3. **2 xil yo'nalish (Bilingual Learning Modes):**
-   - **O'zbekcha ➡️ Inglizcha (UZ ➡️ EN):** Savol sifatida o'zbekcha so'z beriladi, foydalanuvchi inglizchasini topadi/yozadi.
-   - **Inglizcha ➡️ O'zbekcha (EN ➡️ UZ):** Savol sifatida inglizcha so'z beriladi, foydalanuvchi o'zbekchasini topadi/yozadi.
-
-4. **2 xil mashq uslubi (Exercise Modes):**
-   - **Rejim A: Quiz Test (Ko'p tanlovli test):**
-     - Ekranda bitta so'z va uning ostida 4 ta javob varianti (1 ta to'g'ri va 3 ta bazadan olingan chalg'ituvchi variant).
-   - **Rejim B: Harf to'ldirish (Letter Box / Interactive Spelling):**
-     - Ekranning chap tomonida savol so'z (masalan, o'zbekcha yoki inglizcha tarjimasi) chiqadi.
-     - O'ng tomonida esa javob so'zining harflari soniga teng bo'lgan yopiq/disable katakchalar turadi.
-     - Foydalanuvchi klaviatura orqali harflarni ketma-ket to'g'ri kiritadi yoki ekrandagi harf klaviaturasidan foydalanadi.
-
-5. **Deploy va Arxitektura:**
-   - **Framework:** Next.js (App Router, React 19 / Node.js).
-   - **Hosting:** Vercel (avtomatik yangilanish, bepul, SSL bilan, yuqori tezlik).
-   - **Shaxsiy foydalanish (Single-user / Self-hosted focus):** Foydalanuvchining o'zi uchun ortiqcha registratsiya va murakkab tokenlarsiz qulay ishlash.
+Traditional language learning apps (such as Duolingo, Memrise, or Anki) often rely on pre-packaged word lists that do not match the user's immediate everyday reading, technical career, or personal interests. **English Lab** solves this by putting the user in complete control:
+- The user curates and updates their own vocabulary database directly inside a **GitHub repository** (`data/words.json`).
+- The web app reads this database and constructs randomized, distraction-free active recall exercises.
 
 ---
 
-## 3. Loyihaning Afzalliklari
+## 2. Core Features and Requirements
 
-- ⚡ **Tezkor va yengil:** Og'ir SQL/NoSQL bazalari yo'q; ma'lumotlar to'g'ridan-to'g'ri GitHub orqali olinadi va keshlanadi.
-- 🔒 **Versiyalar nazorati (Git versioning):** Har bir qo'shilgan so'z git commit orqali tarixda qoladi, ma'lumotlar yo'qolmaydi.
-- 📱 **To'liq adaptiv (Responsive):** Telefon, planshet va kompyuterda bir xil qulaylikda ishlaydi.
-- 🧠 **Faol eslab qolish (Active Recall):** Shunchaki ko'rish emas, balki so'zni harfma-harf terish orqali imlo (spelling) va xotirani mustahkamlash.
+1. **Self-Managed Vocabulary Database:**
+   - Single words, phrases, and illustrative sentences stored in `data/words.json`.
+   - Categorized by **CEFR proficiency levels** (`A1`, `A2`, `B1`, `B2`, `C1`, `C2`).
+   - Managed directly through Git commits or the GitHub web editor without requiring external databases.
+
+2. **Endless Practice Mode:**
+   - Practice is unconstrained by question caps.
+   - Questions cycle continuously through randomized shuffling until the user elects to conclude their session.
+   - Elimination of stressful timers allows for relaxed, deep memorization.
+
+3. **Bilingual Practice Directions:**
+   - **Uzbek ➡️ English (UZ ➡️ EN):** See the Uzbek meaning on the left, type or select the English translation on the right.
+   - **English ➡️ Uzbek (EN ➡️ UZ):** See the English word on the left, identify the Uzbek definition on the right.
+
+4. **Dual Interactive Exercise Modes:**
+   - **Mode A: Type Over Ghost Watermark (Letter Box):**
+     - Target word letters are visible as subtle, faint ghost watermarks.
+     - As the user types on their keyboard or taps on-screen keys, vibrant letters render directly over the faint guides.
+     - Provides instant visual (emerald pop / rose shake) and acoustic feedback.
+   - **Mode B: Multiple Choice (Quiz):**
+     - 4 interactive options (1 correct answer + 3 dynamically chosen distractors).
+     - Full desktop hotkey support (`[1]`, `[2]`, `[3]`, `[4]`).
+
+5. **Clean Architecture & Technology Stack:**
+   - **Framework:** Next.js 15 (React 19 / Node.js) with App Router.
+   - **Styling:** Tailwind CSS loaded via CDN, combined with custom Dark Blue Glassmorphism styling tokens.
+   - **Audio:** Zero-latency procedural sound synthesis with the browser's Web Audio API.
+   - **Hosting:** Vercel serverless deployment with automatic edge caching.
+
+---
+
+## 3. Key Advantages
+
+- ⚡ **Zero Backend Overhead:** No complex SQL/NoSQL databases or external container setups.
+- 🔒 **Git Version Control:** Every word added or edited is permanently tracked in Git history.
+- 📱 **Fully Responsive:** Fluid layout that transitions from a 2-column desktop split screen to a touch-optimized mobile experience.
+- 🧠 **Superior Active Recall:** Typing directly over faint guides activates motor memory and spelling precision far beyond passive multiple-choice guessing.

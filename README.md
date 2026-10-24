@@ -1,60 +1,83 @@
 # 🧪 English Lab
 
-> **Shaxsiy ingliz tili so'z boyligini oshirish uchun mo'ljallangan interaktiv veb-laboratoriya.**
+> **A modern, interactive personal vocabulary laboratory designed for mastering English vocabulary through active recall, ghost-letter overlay typing, and dynamic quizzes.**
 
-Loyiha **Next.js (React / Node.js)** bazasida quriladi va **Vercel** platformasiga deploy qilinadi. Baza sifatida **GitHub repodagi `data/words.json`** fayli ishlatiladi. Dizayn va stillar **Tailwind CSS (CDN)** orqali ta'minlanadi.
-
----
-
-## 🎯 Asosiy Imkoniyatlar
-
-- 🎲 **20 talik tasodifiy sessiyalar:** Bazadagi so'zlardan random tarzda 20 tasi tanlanadi.
-- 🔄 **2 xil yo'nalish:**
-  - `O'zbekcha ➡️ Inglizcha`
-  - `Inglizcha ➡️ O'zbekcha`
-- 🎮 **2 xil mashg'ulot rejimi:**
-  1. **Quiz Test:** 4 ta variantdan to'g'ri javobni tanlash (klaviaturada `1, 2, 3, 4`).
-  2. **Harf to'ldirish (Letter Box):** Chapda so'z chiqadi, o'ngda disable katakchalarga harflar klaviatura yoki harf tugmalari orqali kiritiladi.
-- 🔤 **Bittalik va aniq so'zlar:** Lug'at bazasi qulay terish uchun bittalik so'zlar (`brave` ➡️ `jasur`) hamda boyitilgan iboralar bilan ta'minlangan.
-- ⚡ **Yengil va mustaqil (Serverless):** Og'ir ma'lumotlar bazasisiz, to'g'ridan-to'g'ri GitHub repodan JSON ma'lumotlar olinadi va Next.js ISR orqali keshlanadi.
-- 🎨 **Tailwind CSS (CDN):** Ortiqcha PostCSS yuklamalarisiz, tezkor va zamonaviy UI.
-- 📊 **Natijalar va Xatolar tahlili:** 20 ta savoldan so'ng aniqlik foizi, sarflangan vaqt va xato qilingan so'zlarni qayta mashq qilish imkoniyati.
+Built with **Next.js 15 (React 19 / Node.js)** following **Clean Architecture**, styled with **Tailwind CSS (CDN)** in a sleek **Dark Blue Glassmorphism** aesthetic, and deployed serverlessly on **Vercel**. Vocabulary data is versioned and stored directly in your GitHub repository as [`data/words.json`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/data/words.json).
 
 ---
 
-## 📚 Batafsil Hujjatlar (Documentation)
+## 🎯 Key Features
 
-Barcha texnik spetsifikatsiyalar va ishlash logikasi [`documents/`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents) papkasida batafsil yozilgan:
-
-1. [01_overview.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/01_overview.md) — Loyihaning umumiy tavsifi va talablari.
-2. [02_architecture.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/02_architecture.md) — Texnik arxitektura, GitHub Data Fetching, Tailwind CDN va Vercel.
-3. [03_data_structure.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/03_data_structure.md) — JSON schema, bittalik so'zlar va qo'lda kiritish tartibi.
-4. [04_game_modes_and_logic.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/04_game_modes_and_logic.md) — 20 talik generator, Test va Harf terish logikasi.
-5. [05_ui_ux_flow.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/05_ui_ux_flow.md) — UI/UX dizayn, ekranlar, klaviatura boshqaruvi.
-6. [06_roadmap.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/06_roadmap.md) — Bosqichma-bosqich ishlab chiqish rejasi.
+- ♾️ **Endless Practice Mode:** No rigid question caps or stressful timers. Practice continuously as long as you want; questions cycle and reshuffle automatically until you choose to finish.
+- 🔤 **Ghost-Letter Overlay Typing:** Prompt on the left, faint semi-transparent watermark letters on the right. Type directly over the faint target letters using your physical keyboard or the on-screen keypad to develop spelling muscle memory.
+- 🎮 **Dual Learning Modes:**
+  1. **Type Over Ghost (Letter Box):** Active recall and precision spelling with instant letter-by-letter visual and acoustic feedback.
+  2. **Multiple Choice (Quiz):** Fast 4-option quizzes with desktop hotkeys (`[1]`, `[2]`, `[3]`, `[4]`).
+- 🔄 **Bilingual Direction:**
+  - `Uzbek ➡️ English` (Recall English terms from Uzbek meanings)
+  - `English ➡️ Uzbek` (Recognize Uzbek translations from English prompts)
+- 📊 **CEFR Proficiency Levels:** Structured across **A1, A2, B1, B2, C1, and C2** levels with single words, example sentences, and grammatical tags.
+- 🎨 **Dark Blue Glassmorphism:** Deep navy backgrounds (`#020617`, `#030a1c`), translucent blurred cards (`backdrop-blur-md`), ambient cyan/indigo glows, and responsive layout across mobile and desktop.
+- 🔊 **Zero-Latency Audio Synthesis:** Native Web Audio API sound effects for correct and incorrect answers without downloading heavy external MP3 files.
+- 📈 **Results & Mistakes Review:** Full accuracy score breakdown, streak counter, and a dedicated **"Retry Mistakes"** flow to review and master missed terms.
 
 ---
 
-## 📂 Loyiha Tuzilishi
+## 📚 Comprehensive Documentation
+
+Detailed technical specifications and architectural documentation are available in the [`documents/`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents) directory:
+
+1. [01_overview.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/01_overview.md) — Project vision, objectives, and feature requirements.
+2. [02_architecture.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/02_architecture.md) — Clean Architecture breakdown, Next.js App Router, Tailwind CDN, and Vercel.
+3. [03_data_structure.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/03_data_structure.md) — Hierarchical CEFR JSON schema, single words, and sentence models.
+4. [04_game_modes_and_logic.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/04_game_modes_and_logic.md) — Endless loop engine, ghost typing mechanics, and validation algorithms.
+5. [05_ui_ux_flow.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/05_ui_ux_flow.md) — Screen flows, responsive split layout, and accessibility shortcuts.
+6. [06_roadmap.md](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/documents/06_roadmap.md) — Development phases, testing guidelines, and Vercel deployment.
+
+---
+
+## 📂 Project Structure
 
 ```text
 english-lab/
-├── .gitignore               # Git uchun istisnolar (node_modules, .next, .env va h.k.)
-├── README.md                # Asosiy tanishtiruv
+├── .gitignore               # Git exclusions (node_modules, .next, environment files)
+├── README.md                # Project introduction and quickstart
+├── package.json             # Dependencies and build scripts
+├── tsconfig.json            # TypeScript configuration with @/* alias
 ├── data/
-│   └── words.json           # So'zlar bazasi (qo'lda kiritiladi va boyitiladi)
-└── documents/               # To'liq texnik hujjatlar (.md)
-    ├── README.md            # Hujjatlar mundarijasi
-    ├── 01_overview.md       # Umumiy tavsif
-    ├── 02_architecture.md   # Texnik arxitektura & Tailwind CDN
-    ├── 03_data_structure.md # JSON ma'lumotlar sxemasi
-    ├── 04_game_modes_and_logic.md # O'yin logikasi
-    ├── 05_ui_ux_flow.md     # Dizayn va interfeys
-    └── 06_roadmap.md        # Ish rejasi
+│   └── words.json           # Hierarchical A1-C2 vocabulary database
+├── documents/               # Technical documentation
+└── src/
+    ├── core/                # Clean Architecture: Entities & Domain Models
+    ├── application/         # Use Cases & Repository Interfaces
+    ├── infrastructure/      # File System loader, GitHub API, Web Audio synthesizer
+    ├── presentation/        # React components (Dashboard, ActiveSession, Results)
+    └── app/                 # Next.js App Router (Layout, API Routes, Global Styles)
 ```
 
 ---
 
-## 🔗 GitHub Repozitoriy
+## 🚀 Quickstart Guide
 
-- Repozitoriy: [https://github.com/muzaffarbekmustafayev/english-lab.git](https://github.com/muzaffarbekmustafayev/english-lab.git)
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Run Local Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 3. Production Build
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 🔗 GitHub Repository
+
+- Repository URL: [https://github.com/muzaffarbekmustafayev/english-lab.git](https://github.com/muzaffarbekmustafayev/english-lab.git)

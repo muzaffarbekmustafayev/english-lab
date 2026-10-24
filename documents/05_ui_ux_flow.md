@@ -1,76 +1,69 @@
-# 05. UI/UX Dizayn va Foydalanuvchi Oqimi (User Interface & Flow)
+# 05. UI/UX Design & User Flow
 
-## 1. Sahifalar va Ekranlar Oqimi (Screen Flow)
+## 1. Screen Flow & Navigation
 
 ```mermaid
-flowchart TD
-    Home["Bosh Sahifa (Dashboard)\n- Yo'nalishni tanlash (UZ->EN / EN->UZ)\n- Rejimni tanlash (Test / Harf terish)\n- Umumiy so'zlar soni va Streak"] 
+flowchart LR
+    Dashboard["Dashboard (Home)\n- Mode Selection\n- CEFR Level Filters\n- Translation Direction"]
     
-    Home -->|Boshlash| Session["Mashg'ulot Ekrani (20 ta savol)\n- Progress bar (1/20 ... 20/20)\n- Taymer\n- Chapda savol, o'ngda javob"]
+    Session["Active Practice\n(Endless Stream)\n- Split Screen Layout\n- Ghost Watermark Typing\n- Audio Pronunciation"]
     
-    Session -->|Savollar tugagach| Results["Natijalar Ekrani (Summary)\n- Natija foizi (masalan, 85%)\n- Xatolar ro'yxati\n- 'Qayta urinish' yoki 'Bosh sahifa'"]
+    Results["Results Summary\n- Score & Accuracy %\n- Mistakes Breakdown\n- Retry Mistakes"]
 
-    Results -->|Xatolarni qayta ishlash| Session
-    Results -->|Yangi sessiya| Home
+    Dashboard -->|Start Endless Practice| Session
+    Session -->|Finish Practice| Results
+    Results -->|Retry Mistakes| Session
+    Results -->|Back to Menu| Dashboard
 ```
 
 ---
 
-## 2. Ekranlar Detallari
+## 2. Design System & Aesthetics
 
-### 1. Bosh Sahifa (Dashboard):
-- **Hero qism:** Zamonaviy sarlavha: *"English Lab — Shaxsiy So'z Boyligingiz Laboratoriyasi"*.
-- **Lug'at holati vidjeti:** GitHub'dan yuklangan so'zlarning umumiy soni (masalan: `142 ta so'z mavjud`).
-- **Sozlamalar paneli:**
-  1. *Yo'nalish:* `O'zbekcha ➡️ Inglizcha` yoki `Inglizcha ➡️ O'zbekcha` (Toggle switch).
-  2. *Rejim:* `Quiz Test (4 ta variant)` yoki `Harf to'ldirish (Letter Box)`.
-- **Harakatga chaqiruvchi tugma (CTA):** Katta yaltirab turuvchi *"Mashg'ulotni Boshlash (20 ta so'z)"* tugmasi.
-- **GitHub havolasi:** To'g'ridan-to'g'ri `data/words.json` faylini ochib, yangi so'z qo'shish uchun havolali tugma.
+### Dark Blue Glassmorphism Theme
+The visual identity is built around deep, atmospheric blue tones with translucent frosted-glass surfaces:
 
----
+- **Deep Space Navy Base:** `#020617` and `#030a1c` background with subtle radial blue/cyan illumination.
+- **Frosted Glass Cards (`.glass-card`):**
+  - Background: `rgba(10, 22, 47, 0.65)`
+  - Blur: `20px` (`backdrop-filter: blur(20px)`)
+  - Border: Subtle ice-blue translucent rim (`rgba(147, 197, 253, 0.14)`)
+  - Shadow: Deep ambient drop shadow with inset highlight.
+- **Accent Palette:**
+  - Primary Cyan/Sky: `#38bdf8` and `#0284c7`
+  - Success Emerald: `#34d399` and `#10b981`
+  - Warning/Mistake Rose: `#f43f5e` and `#fb7185`
+  - Hint Amber: `#f59e0b` and `#fbbf24`
 
-### 2. Mashg'ulot Ekrani (Active Quiz / Letter Workspace):
-- **Yuqori panel (Header):**
-  - Orqaga chiqish tugmasi (`✕ Chiqish`).
-  - Progress bar: 20 ta segmentdan iborat chiziq (har bir to'g'ri javobda yashil, xatoda qizil yonadi).
-  - Raqamli ko'rsatkich: `14 / 20`.
-  - Qulay taymer: `01:24`.
-
-- **Asosiy qism (2 ustunli Split Layout):**
-  - **Chap ustun (Savol kartasi):**
-    - Katta va aniq shriftda so'z.
-    - Kategoriya va daraja nishoni (Badge: masalan, `General • B2`).
-    - Agar mavjud bo'lsa, misol gap (tarjimasi yashirin holda, bosinganda ochiladi).
-  - **O'ng ustun (Interaktiv javob qismi):**
-    - *Test rejimida:* 4 ta katta zamonaviy karta-tugma (Hover effektlari, klaviaturadagi `1, 2, 3, 4` raqamlariga bog'langan).
-    - *Harf to'ldirish rejimida:* Gorizontal qator qilib terilgan disable katakchalar. Har bir to'g'ri harf tushganda yashil rang va sakrash animatsiyasi (scale-up). Pastda mobil klaviatura/harflar palitrasi va `💡 Yordam (Hint)` tugmasi.
+### Typography
+- Primary UI: **Plus Jakarta Sans** (Google Fonts) for clean readability at all sizes.
+- Monospace Data & Badges: **JetBrains Mono** for numerical scores, counters, and hotkey labels.
 
 ---
 
-### 3. Natijalar Ekrani (Results Screen):
-- **Tabrik kartasi:** Animatsiyali doiraviy progress (masalan, `95% A'lo!` yoki `70% Yaxshi!`).
-- **Statistika kartalari:**
-  - Jami vaqt: `02:18`.
-  - To'g'ri: `19 ta`.
-  - Noto'g'ri: `1 ta`.
-- **Xatolar tahlili (Mistakes Accordion):** Xato qilingan so'zlarning to'liq tarjimasi va misollari.
-- **Boshqaruv tugmalari:**
-  - 🔄 *Xatolar ustida ishlash* (faqat xato qilingan so'zlarni qayta test qilish).
-  - 🚀 *Yangi 20 talik boshlash*.
-  - 🏠 *Bosh menyuga qaytish*.
+## 3. Responsive Screen Layouts
+
+### 1. Desktop Experience (Width >= 1024px)
+- **2-Column Split Layout:** Left and right columns share equal height (`items-stretch`).
+  - **Left Card:** Word prompt, CEFR badge, part-of-speech tag, example sentences, and audio pronunciation.
+  - **Right Card:** Ghost-letter typing board with spacious boxes and on-screen helper buttons.
+- **Top Bar:** Pinned session tracker with question counter and finish button.
+
+### 2. Mobile Experience (Width < 768px)
+- **Fluid Vertically Stacked Layout:**
+  - Compact header to preserve vertical screen real estate.
+  - Left card adapts into a clean top question banner.
+  - Right card letter slots wrap automatically to accommodate long words without horizontal scrolling.
+  - Touch-optimized scrambled keypad with 44px+ minimum tap targets for effortless one-handed thumb typing.
 
 ---
 
-## 3. Dizayn Qoidalari va Vizual Estetika
+## 4. Keyboard Shortcuts & Accessibility
 
-- **Ranglar palitrasi (Tailored Theme):**
-  - Fon: To'q qora / Ko'k tusli quyuq fon (`#0B0F19` yoki `#0f172a`).
-  - Kartalar: Yarim shaffof glassmorphism (`rgba(255, 255, 255, 0.05)`, blur: `16px`, nozik chegara `rgba(255, 255, 255, 0.1)`).
-  - Asosiy rang (Primary): Indigo / Violet gradient (`linear-gradient(135deg, #6366f1, #8b5cf6)`).
-  - To'g'ri javob (Success): Emerald yashil (`#10b981`).
-  - Noto'g'ri javob (Error): Qizil rose (`#f43f5e`).
-- **Tipografiya:** Zamonaviy sans-serif shriflar (masalan: `Outfit`, `Inter` yoki `Plus Jakarta Sans`).
-- **Klaviatura yorliqlari (Hotkeys):**
-  - Test rejimida: `1`, `2`, `3`, `4` variantlarni tanlash.
-  - Harf to'ldirishda: Harflar to'g'ridan-to'g'ri klaviaturadan kiritiladi, `Backspace` harfni o'chiradi.
-  - Keyingi savolga o'tish: `Enter` yoki `Space`.
+| Context | Action | Key |
+| :--- | :--- | :--- |
+| **Letter Typing** | Type letter | `A` – `Z` (Hardware keys) |
+| **Letter Typing** | Delete previous letter | `Backspace` |
+| **Letter Typing** | Clear all entered letters | `Escape` |
+| **Multiple Choice** | Select option 1, 2, 3, or 4 | `[1]`, `[2]`, `[3]`, `[4]` |
+| **Header** | Toggle sound on/off | Audio button click |

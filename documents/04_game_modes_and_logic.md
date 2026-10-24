@@ -1,108 +1,82 @@
-# 04. O'yin Rejimlari va Ishlash Logikasi (Game Modes & Logic)
+# 04. Game Modes & Core Logic
 
-## 1. Sessiya Yaratish Logikasi (20-Word Session Sampler)
+## 1. Endless Practice Engine
 
-Har bir mashg'ulot umumiy lug'at bazasidan tanlangan filtr bo'yicha tasodifiy tanlab olingan **20 ta takrorlanmas savoldan** iborat bo'ladi.
-
-### Filtrlash Parametrlari:
-- **Daraja (Level filter):** `A1`, `A2`, `B1`, `B2`, `C1`, `C2` yoki `Barchasi (All)`.
-- **Material turi (Content type):**
-  - **Bittalik so'zlar (Words):** Faqat harfma-harf terish yoki test uchun bittalik so'zlar.
-  - **Gaplar (Sentences):** To'liq jumlalar va ularning tarjimalari.
-  - **Aralash (Mixed):** Barcha so'zlar va gaplar aralash holda.
-
-### Algoritm (Fisher-Yates Shuffle):
-1. Tanlangan daraja va tur bo'yicha mos massiv olinadi.
-2. Agar olingan so'zlar soni 20 tadan kam bo'lsa, mavjud barcha so'zlar olinadi.
-3. Fisher-Yates algoritmi orqali massiv aralashtiriladi va 20 ta element ajratiladi:
-
-```typescript
-export function getRandomSessionItems<T>(items: T[], count: number = 20): T[] {
-  const shuffled = [...items];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled.slice(0, count);
-}
-```
-
----
-
-## 2. O'rganish Yo'nalishlari (Translation Directions)
-
-Foydalanuvchi mashg'ulotni boshlashdan oldin yo'nalishni tanlaydi:
-
-| Yo'nalish | Savol (Chap tomonda) | Javob (O'ng tomonda) | Maqsad |
-| :--- | :--- | :--- | :--- |
-| **UZ ➡️ EN** | O'zbekcha tarjimasi (masalan: `bardoshli, chidamli`) | Inglizcha so'z (masalan: `resilient`) | O'zbekcha fikrlab, inglizcha so'zni eslash va to'g'ri yozish |
-| **EN ➡️ UZ** | Inglizcha so'z (masalan: `resilient`) | O'zbekcha ma'nosi (masalan: `bardoshli, chidamli`) | Inglizcha so'zni ko'rganda uning ma'nosini tezkor tushunish |
-
----
-
-## 3. Rejim A: Test (Ko'p Tanlovli Quiz) Logikasi
-
-Bu rejimda foydalanuvchiga 4 ta variant beriladi: **1 ta to'g'ri javob** va bazadagi boshqa so'zlardan olingan **3 ta tasodifiy chalg'ituvchi variant (distractors)**.
+Unlike rigid platforms that force a fixed session length, **English Lab** features an **Endless Practice Queue**:
 
 ```mermaid
-flowchart LR
-    Word["Savol So'z"] --> GenVariants["Variantlar Generatori\n(1 to'g'ri + 3 tasodifiy)"]
-    GenVariants --> RenderUI["4 ta Tugma (A, B, C, D)"]
-    RenderUI --> UserClick["Foydalanuvchi tanlaydi"]
-    UserClick --> Check{"To'g'rimi?"}
-    Check -- Ha --> CorrectUI["Yashil rang + Ovoz\nKeyingi savolga o'tish (800ms)"]
-    Check -- Yo'q --> WrongUI["Qizil rang + To'g'ri javobni ko'rsatish\nXatolar ro'yxatiga qo'shish"]
+flowchart TD
+    Start["User starts session\n(e.g., Level B2, Single Words)"] --> Fetch["Load matching candidates\n(Shuffle via Fisher-Yates)"]
+    Fetch --> Present["Present current question"]
+    Present --> Answer["User submits answer"]
+    Answer --> Check{"Is Correct?"}
+    Check -- Yes --> Success["Sound Chime + Visual Glow\nAdvance to next question"]
+    Check -- No --> Mistake["Error Buzz + Record Mistake\nAllow retry or continue"]
+    Success --> RefillCheck{"Queue near end?"}
+    Mistake --> RefillCheck
+    RefillCheck -- Yes --> Reshuffle["Auto-reshuffle & append to queue"]
+    RefillCheck -- No --> Present
+    Reshuffle --> Present
+    Present --> UserFinish["User clicks 'Finish Practice'"]
+    UserFinish --> Results["Results Summary & Mistakes Review"]
 ```
 
-### Chalg'ituvchi variantlarni hosil qilish:
-- Joriy so'zdan boshqa barcha so'zlar ro'yxati olinadi.
-- Ular orasidan tasodifiy 3 tasi tanlanadi.
-- To'g'ri javob bilan 3 ta chalg'ituvchi javob yana bir bor aralashtirilib (shuffle), tugmalarga chiqariladi.
+### Key Principles:
+- **No Timers:** Time counting has been intentionally omitted to promote deliberate, low-anxiety memorization.
+- **Continuous Stream:** When questions approach the end of the loaded queue, the engine automatically reshuffles the dataset and appends it to the queue without interrupting practice.
+- **On-Demand Finish:** Users can click **"Finish (N)"** at any point to view their score, accuracy percentage, and review mistakes.
 
 ---
 
-## 4. Rejim B: Harf To'ldirish (Letter Box / Interactive Spelling) Logikasi
+## 2. Mode A: Type Over Ghost Watermark (Letter Box)
 
-Bu rejim imloni (spelling) mustahkamlash uchun eng samarali usul hisoblanadi.
+This is the flagship active-recall exercise designed to build spelling accuracy and muscle memory.
 
-### Ekran Strukturasi:
-- **Chap taraf:** Savol so'z (masalan: o'zbekcha `ko'p qirrali, universal`) + ixtiyoriy misol gap yoki daraja (B2).
-- **O'ng taraf:** Yopiq / disabled harf katakchalari (Letter Slots).
-  - Harflar soni javob so'zining uzunligiga teng bo'ladi (masalan, `versatile` uchun 9 ta katakcha: `[ ][ ][ ][ ][ ][ ][ ][ ][ ]`).
-  - Agar so'zda probel yoki defis bo'lsa, ular oldindan ochiq holda ko'rsatiladi.
+### Split-Layout Structure:
+- **Left Column (Prompt Card):**
+  - Displays the prompt word (e.g., Uzbek `"jasur"` in `UZ ➡️ EN` mode).
+  - Shows CEFR badge (e.g., `A2`), part-of-speech indicator, and example sentences.
+  - Native Text-to-Speech (TTS) speaker button for pronunciation.
+- **Right Column (Ghost Letter Slots):**
+  - Displays character slots corresponding to the exact length of the target English word (e.g., `B R A V E`).
+  - **Ghost Watermark Letters:** Inside each slot, the correct target character is rendered in a faint, semi-transparent style (`opacity: 0.3`).
+  - **Overlay Typing:** As the user types, their input is rendered in high-contrast text directly on top of the faint guide:
+    - **Correct letter:** Lights up vibrant emerald (`bg-emerald-500/25 border-emerald-400 text-cyan-200`) with a scale-up pop animation.
+    - **Incorrect letter:** Shakes with a rose highlight (`bg-rose-500/25 border-rose-400 text-rose-300 animate-shake`).
+  - **Pulsing Cursor:** Highlights the slot currently awaiting input.
 
-```
-+------------------------------------+---------------------------------------+
-|  CHAP TARAF (Savol)                |  O'NG TARAF (Harf Katakchalari)       |
-|                                    |                                       |
-|  O'zbekcha:                        |  [ V ] [ E ] [ R ] [   ] [   ] [   ]  |
-|  "ko'p qirrali, universal"         |  [   ] [   ] [   ]                    |
-|                                    |                                       |
-|  Darajasi: C1                      |  Foydalanuvchi harflarni kiritadi...  |
-|  Misol: "Python is a ... lang"     |  (Klaviatura yoki Harf tugmalari)    |
-+------------------------------------+---------------------------------------+
-```
-
-### Kiritish Mexanizmi (Input Handling):
-1. **To'g'ridan-to'g'ri klaviatura:** Foydalanuvchi klaviaturada harf bosganda (`event.key`), navbatdagi bo'sh katakchaga harf yoziladi.
-2. **Backspace:** Oxirgi to'ldirilgan katakchani tozalaydi va kursor oldingi katakchaga qaytadi.
-3. **Ekrandagi harflar banki (Scrambled Letters Palette):**
-   - Mobil foydalanuvchilar yoki qiyinchilik tug'ilganda foydalanish uchun ekranning pastida aralashtirilgan to'g'ri harflar (va 2-3 ta qo'shimcha tasodifiy harf) tugmalar ko'rinishida turadi. Tugmani bosganda harf bo'sh katakka o'tadi.
-4. **Tekshirish va Feedback:**
-   - Oxirgi harf kiritilishi bilan avtomatik tekshiruv ishga tushadi:
-     - **To'g'ri bo'lsa:** Katakchalar yashil bo'ladi, muvaffaqiyat animatsiyasi (bounce/pulse) va 700ms dan keyin keyingi savolga o'tadi.
-     - **Noto'g'ri bo'lsa:** Katakchalar qizil rangda tebranadi (shake animation), xato harflar tozalanishi yoki foydalanuvchiga qayta urinish imkoni beriladi.
-5. **Hint (Yordam) funksiyasi:**
-   - Foydalanuvchi so'zni eslay olmasa, "💡 Yordam" tugmasini bosishi mumkin. Tizim navbatdagi bitta to'g'ri harfni katakchada ochib beradi.
+### Dual Input Mechanisms:
+1. **Physical Hardware Keyboard:** Listens directly to standard `keydown` events (A-Z, Backspace, Enter, Escape).
+2. **On-Screen Scrambled Keypad:** A touch-friendly palette of scrambled buttons containing all target letters plus random distractors for mobile devices.
 
 ---
 
-## 5. Sessiya Yakuni va Statistika (Results & Review)
+## 3. Mode B: Multiple Choice (Quiz)
 
-20 ta so'z tugagach, yakuniy natijalar ekrani ochiladi:
-- **Ball va Foiz:** Masalan: `18 / 20 (90% aniqlik)`.
-- **Sarf etilgan vaqt:** Masalan: `02:45 daqiqa`.
-- **Xato qilingan so'zlar ro'yxati (Mistakes Review):**
-  - Foydalanuvchi xato qilgan so'zlar jadvali (so'z, tarjimasi, to'g'ri talaffuzi).
-  - **"Xatolarni qayta ishlash" (Retry Mistakes)** tugmasi — faqat xato qilingan so'zlardan iborat mini-sessiya boshlaydi.
-- **Kunlik Streak (Ketma-ket kunlar):** LocalStorage orqali foydalanuvchining necha kun ketma-ket dars qilgani qayd etib boriladi.
+A rapid recognition mode for evaluating passive vocabulary retention.
+
+- **4 Dynamic Options:** One correct answer paired with 3 dynamically selected distractors drawn from other words within the database.
+- **Desktop Keyboard Shortcuts:** Numerical hotkeys `[1]`, `[2]`, `[3]`, and `[4]` map to the four choices.
+- **Visual Feedback:**
+  - Correct option glows emerald with a checkmark badge.
+  - Incorrect selection triggers a rose shake while revealing the correct answer.
+  - Automatically advances after an 850ms review window.
+
+---
+
+## 4. Practice Directions
+
+| Direction | Left Side (Prompt) | Right Side (Target Answer) | Core Objective |
+| :--- | :--- | :--- | :--- |
+| **UZ ➡️ EN** | Uzbek term (e.g. `bardoshli`) | English term (e.g. `resilient`) | Active production & spelling |
+| **EN ➡️ UZ** | English term (e.g. `resilient`) | Uzbek definition (e.g. `bardoshli`) | Reading comprehension & recognition |
+
+---
+
+## 5. Results & Mistakes Review
+
+Upon concluding a session, the **Results Summary** screen provides:
+- **Overall Accuracy:** Visual score badge (e.g., `92% Outstanding!`).
+- **Performance Metrics:** Total questions answered, correct count, and incorrect count.
+- **Mistakes Review Accordion:** Displays every missed term with the user's submitted answer alongside the verified correct spelling.
+- **"Retry Mistakes" Flow:** Launches a targeted practice session containing only the missed terms to ensure total retention.

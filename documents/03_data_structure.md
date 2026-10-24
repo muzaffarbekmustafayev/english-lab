@@ -1,59 +1,59 @@
-# 03. Ma'lumotlar Tuzilishi (Data Structure & JSON)
+# 03. Data Structure & JSON Schema
 
-## 1. Umumiy Konseptsiya
+## 1. Overview
 
-Barcha ma'lumotlar loyihaning GitHub repozitoriysida joylashgan `data/words.json` yagona faylida saqlanadi. Ma'lumotlar strukturalangan, o'qilishi oson va CEFR xalqaro darajalari bo'yicha (**A1, A2, B1, B2, C1, C2**) guruhlangan.
+All vocabulary items, illustrative sentences, and level definitions are stored in a single JSON file: [`data/words.json`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/data/words.json).
 
-Har bir daraja ichida ikkita asosiy qism mavjud:
-1. **`words` (Bittalik so'zlar):** Aniq, sodda va bitta so'zdan iborat leksika (masalan: `water` ➡️ `suv`, `brave` ➡️ `jasur`). Harf terish (Letter Box) va test uchun eng qulay format.
-2. **`sentences` (Gaplar / Iboralar):** So'zning kontekstdagi ishlatilishi, gap tuzilishi va to'liq jumlalar (masalan: *"Where do you live?"* ➡️ *"Siz qayerda yashaysiz?"*).
+The database is organized into **CEFR Proficiency Levels** (`A1`, `A2`, `B1`, `B2`, `C1`, `C2`). Within each level, entries are divided into two distinct collections:
+1. **`words` (Single Words):** Precise individual vocabulary terms (e.g., `water` ➡️ `suv`, `brave` ➡️ `jasur`). Designed specifically for letter typing and single-term quizzes.
+2. **`sentences` (Contextual Sentences):** Full idiomatic sentences demonstrating real-world usage (e.g., *"Where do you live?"* ➡️ *"Siz qayerda yashaysiz?"*).
 
 ---
 
-## 2. TypeScript Interfeysi (Hierarchical Data Schema)
+## 2. TypeScript Data Schema
 
 ```typescript
 export type CEFRLevel = "a1" | "a2" | "b1" | "b2" | "c1" | "c2";
 
-export interface ExampleItem {
-  en: string;
-  uz: string;
+export interface ExampleSentence {
+  en: string; // English example sentence
+  uz: string; // Uzbek translation of the example
 }
 
 export interface WordItem {
-  id: string;               // Yagona ID (masalan: "a1-w-001")
-  en: string;               // Bittalik inglizcha so'z (masalan: "brave")
-  uz: string;               // Bittalik o'zbekcha tarjimasi (masalan: "jasur")
-  type?: "noun" | "verb" | "adjective" | "adverb"; // So'z turkumi
-  synonyms?: string[];      // Sinonimlar massivi (array)
-  examples?: ExampleItem[]; // Misol gaplar massivi (array of objects)
-  hint?: string;            // Qisqa yordamchi belgi
+  id: string;               // Unique identifier (e.g. "a1-w-001")
+  en: string;               // English word (e.g. "brave")
+  uz: string;               // Uzbek translation (e.g. "jasur")
+  type?: "noun" | "verb" | "adjective" | "adverb"; // Part of speech
+  synonyms?: string[];      // Array of synonyms
+  examples?: ExampleSentence[]; // Contextual examples
+  hint?: string;            // Clue or prompt hint
 }
 
 export interface SentenceItem {
-  id: string;               // Gap ID si (masalan: "a1-s-001")
-  en: string;               // Inglizcha to'liq gap
-  uz: string;               // O'zbekcha to'liq tarjima
-  focusWord?: string;       // Gapdagi asosiy e'tibor qaratilgan so'z
-  tokens?: string[];        // Gapning bo'laklarga ajratilgan so'zlari massivi
+  id: string;               // Unique identifier (e.g. "a1-s-001")
+  en: string;               // English sentence
+  uz: string;               // Uzbek translation
+  focusWord?: string;       // Primary keyword being studied
+  tokens?: string[];        // Tokenized array of individual words
 }
 
 export interface LevelGroup {
   level: CEFRLevel;         // "a1" | "a2" | "b1" | "b2" | "c1" | "c2"
-  title: string;            // "Beginner", "Elementary", "Intermediate" va h.k.
-  description: string;      // Qisqa tavsif
-  words: WordItem[];        // Bittalik so'zlar ro'yxati (Array)
-  sentences: SentenceItem[];// To'liq gaplar ro'yxati (Array)
+  title: string;            // "Beginner", "Elementary", etc.
+  description: string;      // Level overview
+  words: WordItem[];        // Single-word list
+  sentences: SentenceItem[];// Sentence list
 }
 
 export interface DatabaseSchema {
-  levels: LevelGroup[];     // Darajalar massivi
+  levels: LevelGroup[];
 }
 ```
 
 ---
 
-## 3. `data/words.json` Fayli Strukturasi (Ierarxik Ko'rinish)
+## 3. Representative `data/words.json` Sample
 
 ```json
 {
@@ -61,7 +61,7 @@ export interface DatabaseSchema {
     {
       "level": "a1",
       "title": "Beginner",
-      "description": "Boshlang'ich darajadagi eng sodda va kundalik so'zlar hamda gaplar",
+      "description": "Essential foundational everyday vocabulary and basic conversational sentences",
       "words": [
         {
           "id": "a1-w-001",
@@ -123,47 +123,8 @@ export interface DatabaseSchema {
 
 ---
 
-## 4. Ma'lumotlarni Filtrlash va Olish Yordamchi Funksiyalari (Helpers)
+## 4. Best Practices for Adding Words
 
-Next.js backend yoki frontend qismida ma'lumotlarni oson va qulay olish uchun quyidagi yordamchi funksiyalar ishlatiladi:
-
-```typescript
-import db from "@/data/words.json";
-import { DatabaseSchema, WordItem, SentenceItem, CEFRLevel } from "@/types/word";
-
-const database = db as DatabaseSchema;
-
-// 1. Tanlangan daraja bo'yicha so'zlarni olish (masalan, faqat B2)
-export function getWordsByLevel(level: CEFRLevel): WordItem[] {
-  const group = database.levels.find((g) => g.level === level);
-  return group ? group.words : [];
-}
-
-// 2. Barcha darajalardagi bittalik so'zlarni bitta tekis massivga yig'ish (Flatten all words)
-export function getAllWords(): (WordItem & { level: CEFRLevel })[] {
-  return database.levels.flatMap((g) =>
-    g.words.map((w) => ({ ...w, level: g.level }))
-  );
-}
-
-// 3. Tanlangan daraja bo'yicha gaplarni olish
-export function getSentencesByLevel(level: CEFRLevel): SentenceItem[] {
-  const group = database.levels.find((g) => g.level === level);
-  return group ? group.sentences : [];
-}
-
-// 4. Barcha gaplarni bitta tekis massivga yig'ish
-export function getAllSentences(): (SentenceItem & { level: CEFRLevel })[] {
-  return database.levels.flatMap((g) =>
-    g.sentences.map((s) => ({ ...s, level: g.level }))
-  );
-}
-```
-
----
-
-## 5. Yangi So'z va Gap Qo'shish Qoidalari
-
-1. **Daraja mosligi:** Yangi so'z CEFR darajasiga mos ravishda tegishli `level` obyektining `words` yoki `sentences` massiviga qo'shiladi.
-2. **Bittalik so'z qoidasi:** `words` qatoridagi `en` va `uz` bitta aniq so'z bo'lishi lozim (harf terish o'yinida foydalanuvchiga qulay bo'lishi uchun). Qo'shimcha ma'nolari `synonyms: ["...", "..."]` massiviga yoziladi.
-3. **Misollar (examples):** So'zning gapda qanday ishlatilishini ko'rsatish uchun `examples: [{ en: "...", uz: "..." }]` obyektlari qo'shiladi.
+1. **Single-Word Consistency:** In the `words` array, keep `en` and `uz` to a single distinct term (e.g., `brave` and `jasur`). Secondary translations belong in the `synonyms` array. This ensures an optimal experience for the ghost-letter typing exercise.
+2. **Casing & Normalization:** Enter terms in lowercase. The system automatically handles normalization and case-insensitivity at runtime.
+3. **Apostrophes in Uzbek:** Standard apostrophes (`'`) are recommended for Uzbek letters like `o'`, `g'`. The validation engine normalizes typographic variants (`‘`, `’`) seamlessly.

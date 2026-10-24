@@ -57,7 +57,12 @@ export default function RootLayout({
                       }
                     },
                     screens: {
-                      'xs': '420px',
+                      '2xs': '360px',
+                      'xs': '400px',
+                    },
+                    spacing: {
+                      '13': '3.25rem',
+                      '15': '3.75rem',
                     }
                   }
                 }

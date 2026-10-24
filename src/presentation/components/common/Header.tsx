@@ -25,27 +25,27 @@ export function Header() {
 
   return (
     <header className="w-full border-b border-slate-800/80 bg-navy-950/70 backdrop-blur-md sticky top-0 z-40">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-            <Sparkles className="w-5 h-5 text-white" />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-500/25 shrink-0">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div>
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
+            <span className="font-extrabold text-base sm:text-xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
               English<span className="text-cyan-400">Lab</span>
             </span>
-            <span className="hidden xs:inline-block ml-2 text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+            <span className="hidden xs:inline-block ml-1.5 sm:ml-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
               v1.0
             </span>
           </div>
         </div>
 
         {/* Right side widgets */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {/* Daily Streak */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs sm:text-sm font-semibold">
-            <Flame className="w-4 h-4 text-amber-400 animate-pulse fill-amber-400/20" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs sm:text-sm font-semibold">
+            <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 animate-pulse fill-amber-400/20" />
             <span>{streak} {streak === 1 ? "day" : "days"}</span>
           </div>
 
@@ -54,7 +54,7 @@ export function Header() {
             onClick={toggleSound}
             aria-label="Toggle Sound"
             title={isMuted ? "Unmute Sound" : "Mute Sound"}
-            className="p-2 rounded-xl bg-navy-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white transition-colors"
+            className="p-1.5 sm:p-2 rounded-xl bg-navy-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white transition-colors"
           >
             {isMuted ? (
               <VolumeX className="w-4 h-4 text-rose-400" />
@@ -69,7 +69,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             title="GitHub Repository"
-            className="p-2 rounded-xl bg-navy-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white transition-colors flex items-center justify-center"
+            className="p-1.5 sm:p-2 rounded-xl bg-navy-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white transition-colors flex items-center justify-center"
           >
             <svg
               className="w-4 h-4 fill-current"

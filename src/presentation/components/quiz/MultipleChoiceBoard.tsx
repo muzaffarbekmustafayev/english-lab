@@ -87,7 +87,7 @@ export function MultipleChoiceBoard({
               key={`${question.id}-${option}-${index}`}
               onClick={() => handleSelect(option)}
               disabled={isLocked}
-              className={`group relative flex items-center justify-between p-4 sm:p-5 rounded-2xl border text-left font-semibold text-sm sm:text-base transition-all duration-200 ${buttonStyle}`}
+              className={`group relative flex items-center justify-between p-3.5 sm:p-5 rounded-2xl border text-left font-semibold text-sm sm:text-base transition-all duration-200 active:scale-[0.98] ${buttonStyle}`}
             >
               <div className="flex items-center gap-3">
                 {/* Number Key badge */}

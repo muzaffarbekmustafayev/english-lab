@@ -175,7 +175,7 @@ export function ResultsSummary({
         {mistakes.length > 0 && (
           <button
             onClick={onRetryMistakes}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all hover:scale-102"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all hover:scale-102 active:scale-95"
           >
             <RotateCcw className="w-4 h-4 text-amber-400" />
             <span>Retry Mistakes</span>
@@ -184,7 +184,7 @@ export function ResultsSummary({
 
         <button
           onClick={onNewSession}
-          className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/35 flex items-center justify-center gap-2 transition-all hover:scale-102"
+          className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/35 flex items-center justify-center gap-2 transition-all hover:scale-102 active:scale-95"
         >
           <Sparkles className="w-4 h-4 text-cyan-200" />
           <span>New Practice Session</span>
@@ -193,7 +193,7 @@ export function ResultsSummary({
 
         <button
           onClick={onGoHome}
-          className="w-full sm:w-auto px-6 py-3.5 rounded-2xl glass-btn text-slate-300 hover:text-white font-semibold text-sm sm:text-base transition-colors"
+          className="w-full sm:w-auto px-6 py-3.5 rounded-2xl glass-btn text-slate-300 hover:text-white font-semibold text-sm sm:text-base transition-colors active:scale-95"
         >
           Back to Menu
         </button>

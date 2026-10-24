@@ -1,279 +1,512 @@
-[
-  {
-    "id": "w-001",
-    "en": "brave",
-    "uz": "jasur",
-    "category": "General",
-    "level": "A2",
-    "example": {
-      "en": "He is a brave young man.",
-      "uz": "U jasur yosh yigit."
-    }
-  },
-  {
-    "id": "w-002",
-    "en": "knowledge",
-    "uz": "bilim",
-    "category": "Education",
-    "level": "A2",
-    "example": {
-      "en": "Knowledge opens many doors.",
-      "uz": "Bilim ko'plab eshiklarni ochadi."
-    }
-  },
-  {
-    "id": "w-003",
-    "en": "victory",
-    "uz": "g'alaba",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "The team celebrated their victory.",
-      "uz": "Jamoa o'z g'alabasini nishonladi."
-    }
-  },
-  {
-    "id": "w-004",
-    "en": "patience",
-    "uz": "sabr",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "Patience is a key to success.",
-      "uz": "Sabr — muvaffaqiyat kalitidir."
-    }
-  },
-  {
-    "id": "w-005",
-    "en": "freedom",
-    "uz": "erkinlik",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "Everyone values freedom.",
-      "uz": "Har kim erkinlikni qadrlaydi."
-    }
-  },
-  {
-    "id": "w-006",
-    "en": "honest",
-    "uz": "halol",
-    "category": "General",
-    "level": "A2",
-    "example": {
-      "en": "Always be honest with yourself.",
-      "uz": "Doimo o'zingizga nisbatan halol bo'ling."
-    }
-  },
-  {
-    "id": "w-007",
-    "en": "create",
-    "uz": "yaratmoq",
-    "category": "General",
-    "level": "A2",
-    "example": {
-      "en": "Artists create beautiful paintings.",
-      "uz": "Rassomlar go'zal rasmlar yaratadilar."
-    }
-  },
-  {
-    "id": "w-008",
-    "en": "discover",
-    "uz": "kashfiyot",
-    "category": "Science",
-    "level": "B1",
-    "example": {
-      "en": "Scientists discover new facts daily.",
-      "uz": "Olimlar har kuni yangi faktlarni kashf etadilar."
-    }
-  },
-  {
-    "id": "w-009",
-    "en": "success",
-    "uz": "muvaffaqiyat",
-    "category": "Business",
-    "level": "B1",
-    "example": {
-      "en": "Hard work leads to success.",
-      "uz": "Qattiq mehnat muvaffaqiyatga olib keladi."
-    }
-  },
-  {
-    "id": "w-010",
-    "en": "peace",
-    "uz": "tinchlik",
-    "category": "General",
-    "level": "A2",
-    "example": {
-      "en": "We all hope for world peace.",
-      "uz": "Biz barchamiz dunyoda tinchlik bo'lishini umid qilamiz."
-    }
-  },
-  {
-    "id": "w-011",
-    "en": "resilient",
-    "uz": "bardoshli",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "She remained resilient under stress.",
-      "uz": "U stress ostida ham bardoshli bo'lib qoldi."
+{
+  "levels": [
+    {
+      "level": "a1",
+      "title": "Beginner",
+      "description": "Boshlang'ich darajadagi eng sodda va kundalik so'zlar hamda gaplar",
+      "words": [
+        {
+          "id": "a1-w-001",
+          "en": "water",
+          "uz": "suv",
+          "type": "noun",
+          "synonyms": ["liquid"],
+          "examples": [
+            {
+              "en": "I drink water every morning.",
+              "uz": "Men har kuni ertalab suv ichaman."
+            }
+          ]
+        },
+        {
+          "id": "a1-w-002",
+          "en": "book",
+          "uz": "kitob",
+          "type": "noun",
+          "synonyms": ["volume"],
+          "examples": [
+            {
+              "en": "This is an interesting book.",
+              "uz": "Bu qiziqarli kitob."
+            }
+          ]
+        },
+        {
+          "id": "a1-w-003",
+          "en": "happy",
+          "uz": "baxtli",
+          "type": "adjective",
+          "synonyms": ["glad", "joyful"],
+          "examples": [
+            {
+              "en": "They look very happy today.",
+              "uz": "Ular bugun juda baxtli ko'rinmoqda."
+            }
+          ]
+        },
+        {
+          "id": "a1-w-004",
+          "en": "clean",
+          "uz": "toza",
+          "type": "adjective",
+          "synonyms": ["pure"],
+          "examples": [
+            {
+              "en": "The room is clean and bright.",
+              "uz": "Xona toza va yorug'."
+            }
+          ]
+        },
+        {
+          "id": "a1-w-005",
+          "en": "learn",
+          "uz": "o'rganmoq",
+          "type": "verb",
+          "synonyms": ["study"],
+          "examples": [
+            {
+              "en": "We learn English every day.",
+              "uz": "Biz har kuni ingliz tilini o'rganamiz."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "a1-s-001",
+          "en": "Where do you live?",
+          "uz": "Siz qayerda yashaysiz?",
+          "focusWord": "live",
+          "tokens": ["where", "do", "you", "live"]
+        },
+        {
+          "id": "a1-s-002",
+          "en": "What is your name?",
+          "uz": "Ismingiz nima?",
+          "focusWord": "name",
+          "tokens": ["what", "is", "your", "name"]
+        },
+        {
+          "id": "a1-s-003",
+          "en": "I need some help.",
+          "uz": "Menga biroz yordam kerak.",
+          "focusWord": "help",
+          "tokens": ["i", "need", "some", "help"]
+        }
+      ]
     },
-    "hint": "chidamli"
-  },
-  {
-    "id": "w-012",
-    "en": "implement",
-    "uz": "joriy_etmoq",
-    "category": "IT",
-    "level": "B1",
-    "example": {
-      "en": "We will implement the feature soon.",
-      "uz": "Biz bu funksiyani tez orada joriy etamiz."
-    }
-  },
-  {
-    "id": "w-013",
-    "en": "versatile",
-    "uz": "universal",
-    "category": "General",
-    "level": "C1",
-    "example": {
-      "en": "This tool is extremely versatile.",
-      "uz": "Ushbu vosita nihoyatda universaldir."
+    {
+      "level": "a2",
+      "title": "Elementary",
+      "description": "Oddiy muloqot va asosiy tushunchalar uchun so'zlar va gaplar",
+      "words": [
+        {
+          "id": "a2-w-001",
+          "en": "brave",
+          "uz": "jasur",
+          "type": "adjective",
+          "synonyms": ["courageous"],
+          "examples": [
+            {
+              "en": "He made a brave decision.",
+              "uz": "U jasur qaror qabul qildi."
+            }
+          ]
+        },
+        {
+          "id": "a2-w-002",
+          "en": "knowledge",
+          "uz": "bilim",
+          "type": "noun",
+          "synonyms": ["wisdom"],
+          "examples": [
+            {
+              "en": "Knowledge is the greatest power.",
+              "uz": "Bilim — eng buyuk kuchdir."
+            }
+          ]
+        },
+        {
+          "id": "a2-w-003",
+          "en": "honest",
+          "uz": "halol",
+          "type": "adjective",
+          "synonyms": ["truthful"],
+          "examples": [
+            {
+              "en": "Give me an honest opinion.",
+              "uz": "Menga halol fikringizni ayting."
+            }
+          ]
+        },
+        {
+          "id": "a2-w-004",
+          "en": "peace",
+          "uz": "tinchlik",
+          "type": "noun",
+          "synonyms": ["calm", "serenity"],
+          "examples": [
+            {
+              "en": "We all wish for peace.",
+              "uz": "Biz barchamiz tinchlik tilaymiz."
+            }
+          ]
+        },
+        {
+          "id": "a2-w-005",
+          "en": "create",
+          "uz": "yaratmoq",
+          "type": "verb",
+          "synonyms": ["make", "build"],
+          "examples": [
+            {
+              "en": "Artists create inspiring works.",
+              "uz": "Rassomlar ilhomlantiruvchi asarlar yaratadilar."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "a2-s-001",
+          "en": "Can you speak more slowly?",
+          "uz": "Biroz sekinroq gapira olasizmi?",
+          "focusWord": "slowly",
+          "tokens": ["can", "you", "speak", "more", "slowly"]
+        },
+        {
+          "id": "a2-s-002",
+          "en": "I will call you tomorrow morning.",
+          "uz": "Ertaga ertalab sizga qo'ng'iroq qilaman.",
+          "focusWord": "tomorrow",
+          "tokens": ["i", "will", "call", "you", "tomorrow", "morning"]
+        }
+      ]
     },
-    "hint": "ko'p qirrali"
-  },
-  {
-    "id": "w-014",
-    "en": "efficient",
-    "uz": "samarali",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "We need an efficient workflow.",
-      "uz": "Bizga samarali ish jarayoni kerak."
+    {
+      "level": "b1",
+      "title": "Intermediate",
+      "description": "Erkin muloqot va mustaqil fikr bildirish uchun so'zlar va gaplar",
+      "words": [
+        {
+          "id": "b1-w-001",
+          "en": "victory",
+          "uz": "g'alaba",
+          "type": "noun",
+          "synonyms": ["triumph", "win"],
+          "examples": [
+            {
+              "en": "They achieved a historic victory.",
+              "uz": "Ular tarixiy g'alabaga erishdilar."
+            }
+          ]
+        },
+        {
+          "id": "b1-w-002",
+          "en": "patience",
+          "uz": "sabr",
+          "type": "noun",
+          "synonyms": ["endurance"],
+          "examples": [
+            {
+              "en": "Learning requires immense patience.",
+              "uz": "O'rganish ulkan sabrni talab qiladi."
+            }
+          ]
+        },
+        {
+          "id": "b1-w-003",
+          "en": "freedom",
+          "uz": "erkinlik",
+          "type": "noun",
+          "synonyms": ["liberty"],
+          "examples": [
+            {
+              "en": "Freedom of speech is vital.",
+              "uz": "So'z erkinligi juda muhimdir."
+            }
+          ]
+        },
+        {
+          "id": "b1-w-004",
+          "en": "efficient",
+          "uz": "samarali",
+          "type": "adjective",
+          "synonyms": ["productive", "effective"],
+          "examples": [
+            {
+              "en": "We established an efficient system.",
+              "uz": "Biz samarali tizim o'rnatdik."
+            }
+          ]
+        },
+        {
+          "id": "b1-w-005",
+          "en": "reliable",
+          "uz": "ishonchli",
+          "type": "adjective",
+          "synonyms": ["dependable", "trustworthy"],
+          "examples": [
+            {
+              "en": "He proved to be a reliable colleague.",
+              "uz": "U ishonchli hamkasb ekanligini isbotladi."
+            }
+          ]
+        },
+        {
+          "id": "b1-w-006",
+          "en": "obstacle",
+          "uz": "to'siq",
+          "type": "noun",
+          "synonyms": ["barrier", "hurdle"],
+          "examples": [
+            {
+              "en": "Overcoming every obstacle made them stronger.",
+              "uz": "Har bir to'siqni yengish ularni kuchliroq qildi."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "b1-s-001",
+          "en": "Practice makes a person perfect.",
+          "uz": "Mashq qilish insonni mukammal qiladi.",
+          "focusWord": "practice",
+          "tokens": ["practice", "makes", "a", "person", "perfect"]
+        },
+        {
+          "id": "b1-s-002",
+          "en": "It is important to manage your time wisely.",
+          "uz": "Vaqtingizni oqilona boshqarish muhimdir.",
+          "focusWord": "wisely",
+          "tokens": ["it", "is", "important", "to", "manage", "your", "time", "wisely"]
+        }
+      ]
+    },
+    {
+      "level": "b2",
+      "title": "Upper-Intermediate",
+      "description": "Murakkab mavzular, texnik va biznes sohalari uchun boyitilgan lug'at",
+      "words": [
+        {
+          "id": "b2-w-001",
+          "en": "resilient",
+          "uz": "bardoshli",
+          "type": "adjective",
+          "synonyms": ["tough", "durable"],
+          "examples": [
+            {
+              "en": "The economy is proving remarkably resilient.",
+              "uz": "Iqtisodiyot sezilarli darajada bardoshli ekanligini ko'rsatmoqda."
+            }
+          ]
+        },
+        {
+          "id": "b2-w-002",
+          "en": "accelerate",
+          "uz": "tezlashtirmoq",
+          "type": "verb",
+          "synonyms": ["speed up", "hasten"],
+          "examples": [
+            {
+              "en": "Digital tools accelerate project delivery.",
+              "uz": "Raqamli vositalar loyihani topshirishni tezlashtiradi."
+            }
+          ]
+        },
+        {
+          "id": "b2-w-003",
+          "en": "collaborate",
+          "uz": "hamkorlik",
+          "type": "verb",
+          "synonyms": ["cooperate", "team up"],
+          "examples": [
+            {
+              "en": "Engineers collaborate to optimize the code.",
+              "uz": "Muhandislar kodni optimallashtirish uchun hamkorlik qiladilar."
+            }
+          ]
+        },
+        {
+          "id": "b2-w-004",
+          "en": "genuine",
+          "uz": "haqiqiy",
+          "type": "adjective",
+          "synonyms": ["authentic", "real"],
+          "examples": [
+            {
+              "en": "Show genuine appreciation for teamwork.",
+              "uz": "Jamoaviy mehnat uchun samimiy minnatdorchilik bildiring."
+            }
+          ]
+        },
+        {
+          "id": "b2-w-005",
+          "en": "thrive",
+          "uz": "rivojlanmoq",
+          "type": "verb",
+          "synonyms": ["flourish", "prosper"],
+          "examples": [
+            {
+              "en": "Open cultures help startups thrive.",
+              "uz": "Ochiq muhit startaplarning rivojlanishiga yordam beradi."
+            }
+          ]
+        },
+        {
+          "id": "b2-w-006",
+          "en": "clarity",
+          "uz": "aniqlik",
+          "type": "noun",
+          "synonyms": ["precision", "lucidity"],
+          "examples": [
+            {
+              "en": "Architectural clarity improves code maintenance.",
+              "uz": "Arxitektura aniqligi kodni qo'llab-quvvatlashni osonlashtiradi."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "b2-s-001",
+          "en": "Continuous improvement is essential for long-term growth.",
+          "uz": "Uzoq muddatli o'sish uchun doimiy takomillashuv zarurdir.",
+          "focusWord": "continuous",
+          "tokens": ["continuous", "improvement", "is", "essential", "for", "long-term", "growth"]
+        },
+        {
+          "id": "b2-s-002",
+          "en": "He handled the unexpected crisis with calm resilience.",
+          "uz": "U kutilmagan inqirozni xotirjam bardoshlilik bilan hal qildi.",
+          "focusWord": "crisis",
+          "tokens": ["he", "handled", "the", "unexpected", "crisis", "with", "calm", "resilience"]
+        }
+      ]
+    },
+    {
+      "level": "c1",
+      "title": "Advanced",
+      "description": "Akademik, chuqur tahliliy va professional darajadagi so'zlar",
+      "words": [
+        {
+          "id": "c1-w-001",
+          "en": "versatile",
+          "uz": "universal",
+          "type": "adjective",
+          "synonyms": ["adaptable", "all-round"],
+          "examples": [
+            {
+              "en": "A versatile framework reduces development friction.",
+              "uz": "Universal freymvork dasturlashdagi qiyinchiliklarni kamaytiradi."
+            }
+          ]
+        },
+        {
+          "id": "c1-w-002",
+          "en": "meticulous",
+          "uz": "sinchkov",
+          "type": "adjective",
+          "synonyms": ["precise", "scrupulous"],
+          "examples": [
+            {
+              "en": "She conducted meticulous testing before release.",
+              "uz": "U relizdan oldin sinchkovlik bilan test o'tkazdi."
+            }
+          ]
+        },
+        {
+          "id": "c1-w-003",
+          "en": "persevere",
+          "uz": "matonat",
+          "type": "verb",
+          "synonyms": ["persist", "endure"],
+          "examples": [
+            {
+              "en": "To achieve mastery, one must persevere daily.",
+              "uz": "Mahoratga erishish uchun har kuni matonat ko'rsatish lozim."
+            }
+          ]
+        },
+        {
+          "id": "c1-w-004",
+          "en": "deteriorate",
+          "uz": "yomonlashmoq",
+          "type": "verb",
+          "synonyms": ["worsen", "decay"],
+          "examples": [
+            {
+              "en": "Without refactoring, system quality will deteriorate.",
+              "uz": "Refaktoring o'tkazilmasa, tizim sifati yomonlashadi."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "c1-s-001",
+          "en": "The correlation between consistency and mastery is undeniable.",
+          "uz": "Muntazamlik va mahorat o'rtasidagi bog'liqlik inkor etib bo'lmasdir.",
+          "focusWord": "undeniable",
+          "tokens": ["the", "correlation", "between", "consistency", "and", "mastery", "is", "undeniable"]
+        }
+      ]
+    },
+    {
+      "level": "c2",
+      "title": "Proficiency",
+      "description": "Eng yuqori daraja — ona tilidek erkin va nozik ma'nolarni ifodalovchi leksika",
+      "words": [
+        {
+          "id": "c2-w-001",
+          "en": "ephemeral",
+          "uz": "o'tkinchi",
+          "type": "adjective",
+          "synonyms": ["transient", "fleeting"],
+          "examples": [
+            {
+              "en": "Trends in web design can often be ephemeral.",
+              "uz": "Veb dizayndagi trendlar ko'pincha o'tkinchi bo'lishi mumkin."
+            }
+          ]
+        },
+        {
+          "id": "c2-w-002",
+          "en": "ubiquitous",
+          "uz": "harqayerda",
+          "type": "adjective",
+          "synonyms": ["omnipresent", "pervasive"],
+          "examples": [
+            {
+              "en": "Smartphones have become ubiquitous in daily life.",
+              "uz": "Smartfonlar kundalik hayotda hamma yerda uchraydigan bo'lib qoldi."
+            }
+          ]
+        },
+        {
+          "id": "c2-w-003",
+          "en": "pragmatic",
+          "uz": "amaliy",
+          "type": "adjective",
+          "synonyms": ["practical", "realistic"],
+          "examples": [
+            {
+              "en": "We adopted a pragmatic approach to problem solving.",
+              "uz": "Biz muammolarni hal qilishda amaliy yondashuvni tanladik."
+            }
+          ]
+        }
+      ],
+      "sentences": [
+        {
+          "id": "c2-s-001",
+          "en": "Eloquence lies in expressing profound ideas with simplicity.",
+          "uz": "Notiqlik — chuqur g'oyalarni soddalik bilan ifoda eta olishdadir.",
+          "focusWord": "eloquence",
+          "tokens": ["eloquence", "lies", "in", "expressing", "profound", "ideas", "with", "simplicity"]
+        }
+      ]
     }
-  },
-  {
-    "id": "w-015",
-    "en": "accelerate",
-    "uz": "tezlashtirmoq",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "We must accelerate the process.",
-      "uz": "Biz jarayonni tezlashtirishimiz kerak."
-    }
-  },
-  {
-    "id": "w-016",
-    "en": "reliable",
-    "uz": "ishonchli",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "He is a reliable friend.",
-      "uz": "U ishonchli do'st."
-    }
-  },
-  {
-    "id": "w-017",
-    "en": "collaborate",
-    "uz": "hamkorlik",
-    "category": "Business",
-    "level": "B2",
-    "example": {
-      "en": "Teams collaborate to solve problems.",
-      "uz": "Jamoalar muammolarni hal qilish uchun hamkorlik qiladilar."
-    }
-  },
-  {
-    "id": "w-018",
-    "en": "obstacle",
-    "uz": "to'siq",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "Fear is an obstacle to growth.",
-      "uz": "Qo'rquv o'sish uchun to'siqdir."
-    }
-  },
-  {
-    "id": "w-019",
-    "en": "genuine",
-    "uz": "haqiqiy",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "His smile was genuine.",
-      "uz": "Uning tabassumi haqiqiy edi."
-    }
-  },
-  {
-    "id": "w-020",
-    "en": "hesitate",
-    "uz": "ikkilanmoq",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "Do not hesitate to reach out.",
-      "uz": "Bog'lanishga ikkilanmang."
-    }
-  },
-  {
-    "id": "w-021",
-    "en": "thrive",
-    "uz": "rivojlanmoq",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "Plants thrive in sunlight.",
-      "uz": "O'simliklar quyosh nurida yaxshi rivojlanadi."
-    }
-  },
-  {
-    "id": "w-022",
-    "en": "clarity",
-    "uz": "aniqlik",
-    "category": "Education",
-    "level": "B2",
-    "example": {
-      "en": "The explanation lacked clarity.",
-      "uz": "Tushuntirishda aniqlik yetishmadi."
-    }
-  },
-  {
-    "id": "w-023",
-    "en": "courage",
-    "uz": "jasorat",
-    "category": "General",
-    "level": "B1",
-    "example": {
-      "en": "She had the courage to speak up.",
-      "uz": "Unda fikrini aytish uchun jasorat bor edi."
-    }
-  },
-  {
-    "id": "w-024",
-    "en": "wisdom",
-    "uz": "donolik",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "Wisdom comes with experience.",
-      "uz": "Donolik tajriba bilan birga keladi."
-    }
-  },
-  {
-    "id": "w-025",
-    "en": "diligent",
-    "uz": "tirishqoq",
-    "category": "General",
-    "level": "B2",
-    "example": {
-      "en": "A diligent student achieves high results.",
-      "uz": "Tirishqoq talaba yuqori natijalarga erishadi."
-    }
-  }
-]
+  ]
+}

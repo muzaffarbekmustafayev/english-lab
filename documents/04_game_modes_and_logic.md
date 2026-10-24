@@ -2,16 +2,23 @@
 
 ## 1. Sessiya Yaratish Logikasi (20-Word Session Sampler)
 
-Har bir mashg'ulot umumiy lug'at bazasidan tasodifiy tanlab olingan **20 ta takrorlanmas so'zdan** iborat bo'ladi.
+Har bir mashg'ulot umumiy lug'at bazasidan tanlangan filtr bo'yicha tasodifiy tanlab olingan **20 ta takrorlanmas savoldan** iborat bo'ladi.
+
+### Filtrlash Parametrlari:
+- **Daraja (Level filter):** `A1`, `A2`, `B1`, `B2`, `C1`, `C2` yoki `Barchasi (All)`.
+- **Material turi (Content type):**
+  - **Bittalik so'zlar (Words):** Faqat harfma-harf terish yoki test uchun bittalik so'zlar.
+  - **Gaplar (Sentences):** To'liq jumlalar va ularning tarjimalari.
+  - **Aralash (Mixed):** Barcha so'zlar va gaplar aralash holda.
 
 ### Algoritm (Fisher-Yates Shuffle):
-1. Bazadagi barcha so'zlar massivi olinadi.
-2. Agar umumiy so'zlar soni 20 tadan kam bo'lsa, bor so'zlarning barchasi ishlatiladi.
-3. Fisher-Yates algoritmi orqali massiv aralashtiriladi va dastlabki 20 ta so'z ajratiladi:
+1. Tanlangan daraja va tur bo'yicha mos massiv olinadi.
+2. Agar olingan so'zlar soni 20 tadan kam bo'lsa, mavjud barcha so'zlar olinadi.
+3. Fisher-Yates algoritmi orqali massiv aralashtiriladi va 20 ta element ajratiladi:
 
 ```typescript
-export function getRandomSessionWords(allWords: WordItem[], count: number = 20): WordItem[] {
-  const shuffled = [...allWords];
+export function getRandomSessionItems<T>(items: T[], count: number = 20): T[] {
+  const shuffled = [...items];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];

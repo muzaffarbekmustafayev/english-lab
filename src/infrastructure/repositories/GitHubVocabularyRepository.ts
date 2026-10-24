@@ -1,7 +1,8 @@
+import fs from "fs";
+import path from "path";
 import { IVocabularyRepository } from "@/application/ports/IVocabularyRepository";
 import { Word, CEFRLevel } from "@/core/entities/Word";
 import { Sentence } from "@/core/entities/Sentence";
-import localDatabase from "../../../data/words.json";
 
 interface RawLevelGroup {
   level: CEFRLevel;
@@ -41,12 +42,12 @@ export class GitHubVocabularyRepository implements IVocabularyRepository {
     }
 
     try {
-      // Vercel / Production muhitida GitHub'dan jonli tekshirish (fallback bilan)
+      // 1. Agar Vercel yoki production bo'lsa va GitHub URL sozlangan bo'lsa
       if (process.env.NODE_ENV === "production") {
         const response = await fetch(this.rawGithubUrl, {
           next: { revalidate: 60 },
           headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
           },
         });
 
@@ -59,12 +60,19 @@ export class GitHubVocabularyRepository implements IVocabularyRepository {
         }
       }
     } catch {
-      // Tarmoqda xatolik bo'lsa, lokal bazaga o'tish
+      // GitHub dan o'qishda xatolik bo'lsa, lokal faylga o'tish
     }
 
-    // Har qanday holatda ishonchli lokal fayldan o'qish
-    this.cachedData = localDatabase as unknown as RawDatabase;
-    return this.cachedData;
+    // 2. Lokal fayldan xavfsiz fs orqali o'qish (Webpack chunk xatolarisiz)
+    try {
+      const filePath = path.join(process.cwd(), "data", "words.json");
+      const fileContent = fs.readFileSync(filePath, "utf-8");
+      this.cachedData = JSON.parse(fileContent) as RawDatabase;
+      return this.cachedData;
+    } catch (err) {
+      console.error("Failed to read local words.json:", err);
+      return { levels: [] };
+    }
   }
 
   async getAllWords(): Promise<Word[]> {

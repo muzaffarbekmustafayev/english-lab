@@ -6,10 +6,10 @@ import {
   Trophy,
   CheckCircle2,
   XCircle,
-  Clock,
   RotateCcw,
   Sparkles,
   ArrowRight,
+  Layers,
 } from "lucide-react";
 import { UserAnswerRecord } from "@/core/entities/QuizSession";
 import { soundService } from "@/infrastructure/sound/WebAudioSoundService";
@@ -19,7 +19,6 @@ interface ResultsSummaryProps {
   correctCount: number;
   incorrectCount: number;
   accuracyPercentage: number;
-  timeElapsedSeconds: number;
   mistakes: UserAnswerRecord[];
   onRetryMistakes: () => void;
   onNewSession: () => void;
@@ -31,7 +30,6 @@ export function ResultsSummary({
   correctCount,
   incorrectCount,
   accuracyPercentage,
-  timeElapsedSeconds,
   mistakes,
   onRetryMistakes,
   onNewSession,
@@ -42,7 +40,7 @@ export function ResultsSummary({
 
     if (accuracyPercentage >= 70) {
       confetti({
-        particleCount: 85,
+        particleCount: 80,
         spread: 75,
         origin: { y: 0.6 },
         colors: ["#38bdf8", "#818cf8", "#34d399", "#f43f5e"],
@@ -62,19 +60,13 @@ export function ResultsSummary({
     }
   }, [accuracyPercentage]);
 
-  const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = secs % 60;
-    return `${m}m ${s}s`;
-  };
-
   let gradeMessage = "Outstanding!";
-  let gradeSub = "You demonstrated excellent vocabulary mastery!";
+  let gradeSub = "You demonstrated excellent vocabulary recall!";
   let gradeColor = "text-emerald-400";
 
   if (accuracyPercentage < 50) {
     gradeMessage = "Keep Practicing";
-    gradeSub = "Review the missed words below and try again to reinforce retention.";
+    gradeSub = "Review the missed words below and retry to reinforce retention.";
     gradeColor = "text-rose-400";
   } else if (accuracyPercentage < 80) {
     gradeMessage = "Great Job!";
@@ -91,7 +83,7 @@ export function ResultsSummary({
         </div>
 
         <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Session Completed!
+          Practice Completed!
         </h1>
         <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-md mx-auto">
           {gradeSub}
@@ -107,8 +99,17 @@ export function ResultsSummary({
           </span>
         </div>
 
-        {/* 3 Metric Badges */}
+        {/* 3 Metrics: Total, Correct, Incorrect */}
         <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mt-8 pt-6 border-t border-slate-800/80 max-w-xl mx-auto">
+          <div className="p-3 sm:p-4 rounded-2xl bg-navy-900/60 border border-slate-800/70">
+            <div className="flex items-center justify-center gap-1.5 text-cyan-400 text-xs sm:text-sm font-semibold mb-1">
+              <Layers className="w-4 h-4" /> Total
+            </div>
+            <div className="text-lg sm:text-2xl font-extrabold text-white">
+              {totalQuestions}
+            </div>
+          </div>
+
           <div className="p-3 sm:p-4 rounded-2xl bg-navy-900/60 border border-slate-800/70">
             <div className="flex items-center justify-center gap-1.5 text-emerald-400 text-xs sm:text-sm font-semibold mb-1">
               <CheckCircle2 className="w-4 h-4" /> Correct
@@ -126,15 +127,6 @@ export function ResultsSummary({
               {incorrectCount}
             </div>
           </div>
-
-          <div className="p-3 sm:p-4 rounded-2xl bg-navy-900/60 border border-slate-800/70">
-            <div className="flex items-center justify-center gap-1.5 text-sky-400 text-xs sm:text-sm font-semibold mb-1">
-              <Clock className="w-4 h-4" /> Time
-            </div>
-            <div className="text-sm sm:text-base font-bold text-slate-200 mt-1">
-              {formatTime(timeElapsedSeconds)}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -147,7 +139,7 @@ export function ResultsSummary({
               Mistakes Review ({mistakes.length})
             </h3>
             <span className="text-xs text-slate-400">
-              Practice these items to solidify memory
+              Review and retry these words
             </span>
           </div>
 
@@ -195,7 +187,7 @@ export function ResultsSummary({
           className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/35 flex items-center justify-center gap-2 transition-all hover:scale-102"
         >
           <Sparkles className="w-4 h-4 text-cyan-200" />
-          <span>New 20-Question Session</span>
+          <span>New Practice Session</span>
           <ArrowRight className="w-4 h-4" />
         </button>
 

@@ -22,7 +22,6 @@ export default function HomePage() {
     correctCount: number;
     incorrectCount: number;
     accuracyPercentage: number;
-    timeElapsedSeconds: number;
     mistakes: UserAnswerRecord[];
   } | null>(null);
 
@@ -37,15 +36,20 @@ export default function HomePage() {
         body: JSON.stringify(config),
       });
 
+      if (!res.ok) {
+        throw new Error(`Server returned ${res.status}`);
+      }
+
       const data = await res.json();
-      if (data.success && Array.isArray(data.questions) && data.questions.length > 0) {
+      if (data && data.success && Array.isArray(data.questions) && data.questions.length > 0) {
         setQuestions(data.questions);
         setView("session");
       } else {
         alert("No questions found in vocabulary database for the selected filters.");
       }
-    } catch {
-      alert("An error occurred while loading the session. Please try again.");
+    } catch (err: unknown) {
+      console.error("Session fetch failed:", err);
+      alert("An error occurred while loading the session. Please check your data or try again.");
     } finally {
       setIsLoading(false);
     }
@@ -56,7 +60,6 @@ export default function HomePage() {
     correctCount: number;
     incorrectCount: number;
     accuracyPercentage: number;
-    timeElapsedSeconds: number;
     mistakes: UserAnswerRecord[];
   }) => {
     setSessionResults(results);
@@ -108,7 +111,7 @@ export default function HomePage() {
 
         {view === "session" && currentConfig && questions.length > 0 && (
           <ActiveSession
-            questions={questions}
+            initialQuestions={questions}
             config={currentConfig}
             onSessionComplete={handleSessionComplete}
             onExit={handleGoHome}
@@ -121,7 +124,6 @@ export default function HomePage() {
             correctCount={sessionResults.correctCount}
             incorrectCount={sessionResults.incorrectCount}
             accuracyPercentage={sessionResults.accuracyPercentage}
-            timeElapsedSeconds={sessionResults.timeElapsedSeconds}
             mistakes={sessionResults.mistakes}
             onRetryMistakes={handleRetryMistakes}
             onNewSession={handleNewSession}

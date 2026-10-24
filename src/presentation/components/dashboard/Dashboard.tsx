@@ -27,7 +27,7 @@ interface DashboardProps {
 
 export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
   const [direction, setDirection] = useState<QuizDirection>("uz_to_en");
-  const [mode, setMode] = useState<GameMode>("quiz");
+  const [mode, setMode] = useState<GameMode>("letters"); // Default to interactive letter typing as requested!
   const [level, setLevel] = useState<CEFRLevel | "all">("all");
   const [contentType, setContentType] = useState<ContentType>("words");
 
@@ -38,7 +38,10 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
 
   useEffect(() => {
     fetch("/api/words")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("API error");
+        return res.json();
+      })
       .then((data) => {
         if (data.success && data.stats) {
           setStats({
@@ -47,7 +50,9 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
           });
         }
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.warn("Could not load stats:", err);
+      });
   }, []);
 
   const handleStart = () => {
@@ -56,7 +61,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
       mode,
       level,
       contentType,
-      questionCount: 20,
+      questionCount: 50, // Plenty of items for continuous endless practice
     });
   };
 
@@ -83,14 +88,15 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Master Your Vocabulary{" "}
+          Master English Vocabulary{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
-            Interactively
+            Without Limits
           </span>
         </h1>
 
         <p className="text-slate-400 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
-          Practice 20 randomized questions directly generated from your GitHub repository database.
+          Continuous, endless practice generated directly from your GitHub repository database.
+          Type over ghost translation watermarks to build muscular memory.
         </p>
 
         {/* Database Stats */}
@@ -100,7 +106,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
               Single Words
             </span>
             <span className="text-xl sm:text-2xl font-black text-cyan-300">
-              {stats.totalWords || 25}+
+              {stats.totalWords || 29}+
             </span>
           </div>
           <div className="h-8 w-px bg-slate-800" />
@@ -109,16 +115,16 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
               Sentences
             </span>
             <span className="text-xl sm:text-2xl font-black text-indigo-300">
-              {stats.totalSentences || 15}+
+              {stats.totalSentences || 11}+
             </span>
           </div>
           <div className="h-8 w-px bg-slate-800" />
           <div>
             <span className="text-xs text-slate-500 uppercase tracking-wider block font-semibold">
-              Session Size
+              Mode
             </span>
-            <span className="text-xl sm:text-2xl font-black text-white">
-              20 Qs
+            <span className="text-xl sm:text-2xl font-black text-emerald-300">
+              Endless
             </span>
           </div>
         </div>
@@ -137,6 +143,28 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
                 type="button"
+                onClick={() => setMode("letters")}
+                className={`p-4 rounded-2xl border text-left transition-all ${
+                  mode === "letters"
+                    ? "bg-cyan-500/15 border-cyan-400 text-white shadow-lg shadow-cyan-500/15"
+                    : "bg-navy-900/60 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="font-extrabold text-sm sm:text-base">
+                    Type Over Ghost
+                  </span>
+                  {mode === "letters" && (
+                    <Check className="w-4 h-4 text-cyan-400" />
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Uzbek prompt on the left, type English letters directly over faint watermark letters.
+                </p>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => setMode("quiz")}
                 className={`p-4 rounded-2xl border text-left transition-all ${
                   mode === "quiz"
@@ -153,29 +181,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
                   )}
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Choose from 4 options. Ideal for rapid vocabulary recognition.
-                </p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setMode("letters")}
-                className={`p-4 rounded-2xl border text-left transition-all ${
-                  mode === "letters"
-                    ? "bg-cyan-500/15 border-cyan-400 text-white shadow-lg shadow-cyan-500/15"
-                    : "bg-navy-900/60 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="font-extrabold text-sm sm:text-base">
-                    Letter Fill-In
-                  </span>
-                  {mode === "letters" && (
-                    <Check className="w-4 h-4 text-cyan-400" />
-                  )}
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Fill in disabled letter slots. Perfect for active recall & spelling.
+                  Choose from 4 options. Fast keyboard shortcuts: [1], [2], [3], [4].
                 </p>
               </button>
             </div>
@@ -209,7 +215,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
                   )}
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Given the Uzbek meaning, recall & type the English term.
+                  See Uzbek translation, type or select English word.
                 </p>
               </button>
 
@@ -231,7 +237,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
                   )}
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Given the English word, identify the correct translation.
+                  See English term, type or select Uzbek translation.
                 </p>
               </button>
             </div>
@@ -241,7 +247,6 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
 
       {/* 3. Level & Content Filter */}
       <div className="glass-card rounded-3xl p-5 sm:p-7 border border-slate-800/80 flex flex-col gap-5">
-        {/* CEFR Level Chips */}
         <div>
           <div className="flex items-center gap-2 text-sm font-bold text-white mb-3">
             <GraduationCap className="w-4 h-4 text-cyan-400" />
@@ -266,7 +271,6 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
           </div>
         </div>
 
-        {/* Content Type */}
         <div className="pt-4 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-sm font-bold text-white mb-3">
             <Type className="w-4 h-4 text-indigo-400" />
@@ -319,7 +323,7 @@ export function Dashboard({ onStartSession, isLoading }: DashboardProps) {
         >
           <Play className="w-5 h-5 fill-white" />
           <span>
-            {isLoading ? "Loading..." : "Start Session (20 Questions)"}
+            {isLoading ? "Preparing Practice..." : "Start Endless Practice"}
           </span>
         </button>
       </div>

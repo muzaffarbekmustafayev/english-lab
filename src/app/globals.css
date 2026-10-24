@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  background-color: #030712;
+  color: #f1f5f9;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Chuqur Dark Blue fon effekti */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(59, 130, 246, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, #020617 0%, #030a1c 50%, #020617 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Premium Dark Blue Glassmorphism Card */
+.glass-card {
+  background: rgba(10, 22, 47, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(147, 197, 253, 0.14);
+  box-shadow: 
+    0 25px 50px -12px rgba(2, 6, 23, 0.75),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.glass-card-hover {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(14, 30, 65, 0.75);
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 30px 60px -15px rgba(2, 6, 23, 0.9),
+    0 0 25px rgba(56, 189, 248, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Tugmalar uchun Dark Blue Glass */
+.glass-btn {
+  background: rgba(15, 33, 71, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 197, 253, 0.15);
+  transition: all 0.2s ease;
+}
+
+.glass-btn:hover {
+  background: rgba(23, 49, 105, 0.85);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+/* Harf katakchalari uchun maxsus Glass Slot */
+.glass-slot {
+  background: rgba(12, 26, 56, 0.8);
+  border: 1.5px solid rgba(147, 197, 253, 0.18);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.glass-slot.active {
+  border-color: #38bdf8;
+  background: rgba(14, 165, 233, 0.15);
+  box-shadow: 
+    0 0 15px rgba(56, 189, 248, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Xato tebranish animatsiyasi */
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-7px); }
+  40%, 80% { transform: translateX(7px); }
+}
+
+.animate-shake {
+  animation: error-shake 0.35s ease-in-out;
+}
+
+/* To'g'ri javob sakrash animatsiyasi */
+@keyframes correct-pop {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop {
+  animation: correct-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Maxsus ingichka scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}

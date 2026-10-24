@@ -1,0 +1,279 @@
+[
+  {
+    "id": "w-001",
+    "en": "brave",
+    "uz": "jasur",
+    "category": "General",
+    "level": "A2",
+    "example": {
+      "en": "He is a brave young man.",
+      "uz": "U jasur yosh yigit."
+    }
+  },
+  {
+    "id": "w-002",
+    "en": "knowledge",
+    "uz": "bilim",
+    "category": "Education",
+    "level": "A2",
+    "example": {
+      "en": "Knowledge opens many doors.",
+      "uz": "Bilim ko'plab eshiklarni ochadi."
+    }
+  },
+  {
+    "id": "w-003",
+    "en": "victory",
+    "uz": "g'alaba",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "The team celebrated their victory.",
+      "uz": "Jamoa o'z g'alabasini nishonladi."
+    }
+  },
+  {
+    "id": "w-004",
+    "en": "patience",
+    "uz": "sabr",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "Patience is a key to success.",
+      "uz": "Sabr — muvaffaqiyat kalitidir."
+    }
+  },
+  {
+    "id": "w-005",
+    "en": "freedom",
+    "uz": "erkinlik",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "Everyone values freedom.",
+      "uz": "Har kim erkinlikni qadrlaydi."
+    }
+  },
+  {
+    "id": "w-006",
+    "en": "honest",
+    "uz": "halol",
+    "category": "General",
+    "level": "A2",
+    "example": {
+      "en": "Always be honest with yourself.",
+      "uz": "Doimo o'zingizga nisbatan halol bo'ling."
+    }
+  },
+  {
+    "id": "w-007",
+    "en": "create",
+    "uz": "yaratmoq",
+    "category": "General",
+    "level": "A2",
+    "example": {
+      "en": "Artists create beautiful paintings.",
+      "uz": "Rassomlar go'zal rasmlar yaratadilar."
+    }
+  },
+  {
+    "id": "w-008",
+    "en": "discover",
+    "uz": "kashfiyot",
+    "category": "Science",
+    "level": "B1",
+    "example": {
+      "en": "Scientists discover new facts daily.",
+      "uz": "Olimlar har kuni yangi faktlarni kashf etadilar."
+    }
+  },
+  {
+    "id": "w-009",
+    "en": "success",
+    "uz": "muvaffaqiyat",
+    "category": "Business",
+    "level": "B1",
+    "example": {
+      "en": "Hard work leads to success.",
+      "uz": "Qattiq mehnat muvaffaqiyatga olib keladi."
+    }
+  },
+  {
+    "id": "w-010",
+    "en": "peace",
+    "uz": "tinchlik",
+    "category": "General",
+    "level": "A2",
+    "example": {
+      "en": "We all hope for world peace.",
+      "uz": "Biz barchamiz dunyoda tinchlik bo'lishini umid qilamiz."
+    }
+  },
+  {
+    "id": "w-011",
+    "en": "resilient",
+    "uz": "bardoshli",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "She remained resilient under stress.",
+      "uz": "U stress ostida ham bardoshli bo'lib qoldi."
+    },
+    "hint": "chidamli"
+  },
+  {
+    "id": "w-012",
+    "en": "implement",
+    "uz": "joriy_etmoq",
+    "category": "IT",
+    "level": "B1",
+    "example": {
+      "en": "We will implement the feature soon.",
+      "uz": "Biz bu funksiyani tez orada joriy etamiz."
+    }
+  },
+  {
+    "id": "w-013",
+    "en": "versatile",
+    "uz": "universal",
+    "category": "General",
+    "level": "C1",
+    "example": {
+      "en": "This tool is extremely versatile.",
+      "uz": "Ushbu vosita nihoyatda universaldir."
+    },
+    "hint": "ko'p qirrali"
+  },
+  {
+    "id": "w-014",
+    "en": "efficient",
+    "uz": "samarali",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "We need an efficient workflow.",
+      "uz": "Bizga samarali ish jarayoni kerak."
+    }
+  },
+  {
+    "id": "w-015",
+    "en": "accelerate",
+    "uz": "tezlashtirmoq",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "We must accelerate the process.",
+      "uz": "Biz jarayonni tezlashtirishimiz kerak."
+    }
+  },
+  {
+    "id": "w-016",
+    "en": "reliable",
+    "uz": "ishonchli",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "He is a reliable friend.",
+      "uz": "U ishonchli do'st."
+    }
+  },
+  {
+    "id": "w-017",
+    "en": "collaborate",
+    "uz": "hamkorlik",
+    "category": "Business",
+    "level": "B2",
+    "example": {
+      "en": "Teams collaborate to solve problems.",
+      "uz": "Jamoalar muammolarni hal qilish uchun hamkorlik qiladilar."
+    }
+  },
+  {
+    "id": "w-018",
+    "en": "obstacle",
+    "uz": "to'siq",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "Fear is an obstacle to growth.",
+      "uz": "Qo'rquv o'sish uchun to'siqdir."
+    }
+  },
+  {
+    "id": "w-019",
+    "en": "genuine",
+    "uz": "haqiqiy",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "His smile was genuine.",
+      "uz": "Uning tabassumi haqiqiy edi."
+    }
+  },
+  {
+    "id": "w-020",
+    "en": "hesitate",
+    "uz": "ikkilanmoq",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "Do not hesitate to reach out.",
+      "uz": "Bog'lanishga ikkilanmang."
+    }
+  },
+  {
+    "id": "w-021",
+    "en": "thrive",
+    "uz": "rivojlanmoq",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "Plants thrive in sunlight.",
+      "uz": "O'simliklar quyosh nurida yaxshi rivojlanadi."
+    }
+  },
+  {
+    "id": "w-022",
+    "en": "clarity",
+    "uz": "aniqlik",
+    "category": "Education",
+    "level": "B2",
+    "example": {
+      "en": "The explanation lacked clarity.",
+      "uz": "Tushuntirishda aniqlik yetishmadi."
+    }
+  },
+  {
+    "id": "w-023",
+    "en": "courage",
+    "uz": "jasorat",
+    "category": "General",
+    "level": "B1",
+    "example": {
+      "en": "She had the courage to speak up.",
+      "uz": "Unda fikrini aytish uchun jasorat bor edi."
+    }
+  },
+  {
+    "id": "w-024",
+    "en": "wisdom",
+    "uz": "donolik",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "Wisdom comes with experience.",
+      "uz": "Donolik tajriba bilan birga keladi."
+    }
+  },
+  {
+    "id": "w-025",
+    "en": "diligent",
+    "uz": "tirishqoq",
+    "category": "General",
+    "level": "B2",
+    "example": {
+      "en": "A diligent student achieves high results.",
+      "uz": "Tirishqoq talaba yuqori natijalarga erishadi."
+    }
+  }
+]

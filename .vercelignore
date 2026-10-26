@@ -1,0 +1,15 @@
+# Vercel Deployment Exclusions
+# These files are kept in Git, but excluded from Vercel build/serverless deployment to minimize build size
+
+# Heavy source PDFs and raw datasets (only words.json is needed at runtime)
+data/sources/
+data/words.backup.json
+
+# Documentation and development scripts
+documents/
+scripts/
+
+# Development / OS files
+.DS_Store
+Thumbs.db
+*.log

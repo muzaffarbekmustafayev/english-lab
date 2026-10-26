@@ -123,7 +123,29 @@ export interface DatabaseSchema {
 
 ---
 
-## 4. Best Practices for Adding Words
+## 4. Vocabulary Sources & Integration Pipeline
+
+The core vocabulary database is generated and enriched from authoritative international standards:
+1. **Oxford 3000™ & Oxford 5000™ (CEFR A1–C1):** Official lists from Oxford Learner's Dictionaries.
+2. **Langeek CEFR Vocabulary Lists (A1–C1):** Categorized topic lists with definitions and phonetics.
+3. **English Profile EVP:** Cambridge English Vocabulary Profile CEFR benchmarking.
+
+Raw PDF documents and structured datasets are stored locally in [`data/sources/`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/data/sources/):
+- `Oxford_3000_by_CEFR.pdf`
+- `Oxford_5000_by_CEFR.pdf`
+- `The_Oxford_5000.pdf`
+- `Langeek_A1.pdf` ... `Langeek_C1.pdf`
+- `oxford_5000_raw.json`
+- `translations_cache.json`
+
+### Import Pipeline
+The pipeline is located at [`scripts/import_vocabulary.py`](file:///c:/Users/muzaf/Desktop/mzfck/projects/english-lab/scripts/import_vocabulary.py). It automatically parses, maps parts of speech, translates to Uzbek, preserves existing custom words and sentences, and updates `data/words.json`.
+
+Current database totals: **5,328+ words** across A1–C2.
+
+---
+
+## 5. Best Practices for Adding Words
 
 1. **Single-Word Consistency:** In the `words` array, keep `en` and `uz` to a single distinct term (e.g., `brave` and `jasur`). Secondary translations belong in the `synonyms` array. This ensures an optimal experience for the ghost-letter typing exercise.
 2. **Casing & Normalization:** Enter terms in lowercase. The system automatically handles normalization and case-insensitivity at runtime.

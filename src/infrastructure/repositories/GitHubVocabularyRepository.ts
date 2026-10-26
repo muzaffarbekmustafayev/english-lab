@@ -41,9 +41,27 @@ export class GitHubVocabularyRepository implements IVocabularyRepository {
       return this.cachedData;
     }
 
+    // 1. Birinchi navbatda lokal fayldan o'qish (Vercel serverless va lokal muhitda eng tez va barqaror)
+    const forceRemote = process.env.FORCE_REMOTE_GITHUB === "true";
+    if (!forceRemote) {
+      try {
+        const filePath = path.join(process.cwd(), "data", "words.json");
+        if (fs.existsSync(filePath)) {
+          const fileContent = fs.readFileSync(filePath, "utf-8");
+          const parsed = JSON.parse(fileContent) as RawDatabase;
+          if (parsed && Array.isArray(parsed.levels) && parsed.levels.length > 0) {
+            this.cachedData = parsed;
+            return this.cachedData;
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to read local words.json, attempting remote fallback:", err);
+      }
+    }
+
+    // 2. Agar lokal fayl topilmasa yoki FORCE_REMOTE_GITHUB yoqilgan bo'lsa, GitHub dan o'qish
     try {
-      // 1. Agar Vercel yoki production bo'lsa va GitHub URL sozlangan bo'lsa
-      if (process.env.NODE_ENV === "production") {
+      if (this.rawGithubUrl) {
         const response = await fetch(this.rawGithubUrl, {
           next: { revalidate: 60 },
           headers: {
@@ -59,20 +77,11 @@ export class GitHubVocabularyRepository implements IVocabularyRepository {
           }
         }
       }
-    } catch {
-      // GitHub dan o'qishda xatolik bo'lsa, lokal faylga o'tish
+    } catch (err) {
+      console.error("Failed to fetch remote words database:", err);
     }
 
-    // 2. Lokal fayldan xavfsiz fs orqali o'qish (Webpack chunk xatolarisiz)
-    try {
-      const filePath = path.join(process.cwd(), "data", "words.json");
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      this.cachedData = JSON.parse(fileContent) as RawDatabase;
-      return this.cachedData;
-    } catch (err) {
-      console.error("Failed to read local words.json:", err);
-      return { levels: [] };
-    }
+    return { levels: [] };
   }
 
   async getAllWords(): Promise<Word[]> {

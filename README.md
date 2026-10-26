@@ -45,7 +45,10 @@ english-lab/
 ├── package.json             # Dependencies and build scripts
 ├── tsconfig.json            # TypeScript configuration with @/* alias
 ├── data/
-│   └── words.json           # Hierarchical A1-C2 vocabulary database
+│   ├── words.json           # 5,300+ CEFR (A1-C2) words with Uzbek translations
+│   └── sources/             # Oxford 3000/5000 & Langeek PDFs, datasets & cache
+├── scripts/
+│   └── import_vocabulary.py # Automated extraction, translation & merge pipeline
 ├── documents/               # Technical documentation
 └── src/
     ├── core/                # Clean Architecture: Entities & Domain Models
